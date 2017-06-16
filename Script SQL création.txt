@@ -1,0 +1,70 @@
+#------------------------------------------------------------
+#        Script MySQL.
+#------------------------------------------------------------
+
+
+#------------------------------------------------------------
+# Table: HighScore
+#------------------------------------------------------------
+
+CREATE TABLE HighScore(
+        ID     int (11) Auto_increment  NOT NULL ,
+        Nom    Char (25) NOT NULL ,
+        Score  Int NOT NULL ,
+        Niveau Int NOT NULL ,
+        PRIMARY KEY (ID )
+)ENGINE=InnoDB;
+
+
+#------------------------------------------------------------
+# Table: Mob
+#------------------------------------------------------------
+
+CREATE TABLE Mob(
+        ID      int (11) Auto_increment  NOT NULL ,
+        Diamant Bool NOT NULL ,
+        Points  Int NOT NULL ,
+        Code    Char (25) NOT NULL ,
+        PRIMARY KEY (ID )
+)ENGINE=InnoDB;
+
+
+#------------------------------------------------------------
+# Table: Permeabilite
+#------------------------------------------------------------
+
+CREATE TABLE Permeabilite(
+        ID   int (11) Auto_increment  NOT NULL ,
+        Type Char (25) NOT NULL ,
+        PRIMARY KEY (ID )
+)ENGINE=InnoDB;
+
+
+#------------------------------------------------------------
+# Table: Map
+#------------------------------------------------------------
+
+CREATE TABLE Map(
+        ID               int (11) Auto_increment  NOT NULL ,
+        Longueur         Int NOT NULL ,
+        Hauteur          Int NOT NULL ,
+        Code             Longtext NOT NULL ,
+        DiamantToCollect Int NOT NULL ,
+        Temps            Int NOT NULL ,
+        PRIMARY KEY (ID )
+)ENGINE=InnoDB;
+
+
+#------------------------------------------------------------
+# Table: Decor
+#------------------------------------------------------------
+
+CREATE TABLE Decor(
+        ID              int (11) Auto_increment  NOT NULL ,
+        Gravite         Bool NOT NULL ,
+        Code            Char (25) NOT NULL ,
+        ID_Permeabilite Int NOT NULL ,
+        PRIMARY KEY (ID )
+)ENGINE=InnoDB;
+
+ALTER TABLE Decor ADD CONSTRAINT FK_Decor_ID_Permeabilite FOREIGN KEY (ID_Permeabilite) REFERENCES Permeabilite(ID);
