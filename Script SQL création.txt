@@ -72,3 +72,17 @@ INSERT INTO permeability (Type) VALUES ("SOLID");
 INSERT INTO permeability (Type) VALUES ("ENTRY");
 INSERT INTO permeability (Type) VALUES ("UNBREAKABLE");
 INSERT INTO permeability (Type) VALUES ("LIVING");
+
+INSERT INTO `element` (`ID`, `Name`, `Code`, `Value`, `Droppable`, `ID_Permeability`) VALUES
+(1, 'Mud', 'm', NULL, NULL, 2),
+(2, 'Door', 'D', NULL, NULL, 6),
+(3, 'SuperWall', 'S', NULL, NULL, 7),
+(4, 'Air', 'a', NULL, NULL, 1),
+(5, 'Wall', 'W', NULL, NULL, 5),
+(6, 'Diamond', 'd', NULL, NULL, 4),
+(7, 'Rock', 'r', NULL, NULL, 3),
+(8, 'Goblin', '1', 50, NULL, 8),
+(9, 'Monster', '2', 50, NULL, 8),
+(10, 'Rat', '3', NULL, 1, 8),
+(11, 'Spider', '4', NULL, 1, 8);
+
