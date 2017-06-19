@@ -83,6 +83,6 @@ INSERT INTO `element` (`ID`, `Name`, `Code`, `Value`, `Droppable`, `ID_Permeabil
 (7, 'Rock', 'r', NULL, NULL, 3),
 (8, 'Goblin', '1', 50, NULL, 8),
 (9, 'Monster', '2', 50, NULL, 8),
-(10, 'Rat', '3', NULL, 1, 8),
+(10, 'Bat', '3', NULL, 1, 8),
 (11, 'Spider', '4', NULL, 1, 8);
 
