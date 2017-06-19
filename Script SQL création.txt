@@ -58,3 +58,17 @@ CREATE TABLE COMPOSED(
 ALTER TABLE Element ADD CONSTRAINT FK_Element_ID_Permeability FOREIGN KEY (ID_Permeability) REFERENCES Permeability(ID);
 ALTER TABLE COMPOSED ADD CONSTRAINT FK_COMPOSED_ID FOREIGN KEY (ID_Map) REFERENCES Map(ID);
 ALTER TABLE COMPOSED ADD CONSTRAINT FK_COMPOSED_ID_Element FOREIGN KEY (ID_Element) REFERENCES Element(ID);
+
+
+
+#------------------------------------------------------------
+# REMPLISSAGE
+#------------------------------------------------------------
+INSERT INTO permeability (Type) VALUES ("PENETRABLE");
+INSERT INTO permeability (Type) VALUES ("BREAKABLE");
+INSERT INTO permeability (Type) VALUES ("PUSHABLE");
+INSERT INTO permeability (Type) VALUES ("COLLECTABLE");
+INSERT INTO permeability (Type) VALUES ("SOLID");
+INSERT INTO permeability (Type) VALUES ("ENTRY");
+INSERT INTO permeability (Type) VALUES ("UNBREAKABLE");
+INSERT INTO permeability (Type) VALUES ("LIVING");
