@@ -117,3 +117,14 @@ FROM
 WHERE
 	map.ID = LEVEL$$
 DELIMITER ;
+
+DELIMITER $$
+CREATE DEFINER=`root`@`localhost` PROCEDURE `findWidth`(IN `level` INT)
+    NO SQL
+SELECT
+	width
+From 
+	map
+WHERE
+	ID = LEVEL$$
+DELIMITER ;
