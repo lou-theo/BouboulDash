@@ -140,3 +140,14 @@ FROM
 WHERE
 	ID = LEVEL$$
 DELIMITER ;
+
+DELIMITER $$
+CREATE DEFINER=`root`@`localhost` PROCEDURE `findDiamondToCollect`(IN `level` INT)
+    NO SQL
+SELECT
+	diamondtocollect
+FROM
+	map
+WHERE
+	ID = LEVEL$$
+DELIMITER ;
