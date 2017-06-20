@@ -87,3 +87,18 @@ INSERT INTO `element` (`ID`, `Name`, `Code`, `Value`, `Droppable`, `ID_Permeabil
 (11, 'Spider', '4', NULL, 1, 8),
 (12, 'Hero', 'H', NULL, NULL, 8);
 
+
+#------------------------------------------------------------
+# PROCEDURES STOCKEES
+#------------------------------------------------------------
+
+CREATE PROCEDURE `findAllBricks`(IN `level` INT) NOT DETERMINISTIC NO SQL SQL SECURITY DEFINER SELECT
+	Code,
+    X,
+    Y
+FROM
+	element 
+    INNER JOIN composed ON element.ID = composed.ID_Element
+    INNER JOIN map ON composed.ID_Map = map.ID
+WHERE
+	map.ID = LEVEL;
