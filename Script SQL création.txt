@@ -128,3 +128,15 @@ From
 WHERE
 	ID = LEVEL$$
 DELIMITER ;
+
+
+DELIMITER $$
+CREATE DEFINER=`root`@`localhost` PROCEDURE `findTimer`(IN `level` INT)
+    NO SQL
+SELECT
+	Timer
+FROM 
+	map
+WHERE
+	ID = LEVEL$$
+DELIMITER ;
