@@ -151,3 +151,48 @@ FROM
 WHERE
 	ID = LEVEL$$
 DELIMITER ;
+
+DELIMITER $$
+CREATE DEFINER=`root`@`localhost` PROCEDURE `findCode`(IN `callout` CHAR(20))
+    NO SQL
+SELECT
+	Code
+FROM
+	element
+where 
+	Name = callout$$
+DELIMITER ;
+
+DELIMITER $$
+CREATE DEFINER=`root`@`localhost` PROCEDURE `findPermeability`(IN `callout` CHAR(20))
+    NO SQL
+SELECT
+	Type
+FROM
+	element 
+    INNER JOIN permeability on element.ID_Permeability = permeability.ID
+WHERE
+	name = callout$$
+DELIMITER ;
+
+DELIMITER $$
+CREATE DEFINER=`root`@`localhost` PROCEDURE `findValue`(IN `callout` CHAR(20))
+    NO SQL
+SELECT	
+	VALUE
+FROM
+	element
+WHERE
+	name = callout$$
+DELIMITER ;
+
+DELIMITER $$
+CREATE DEFINER=`root`@`localhost` PROCEDURE `findDrop`(IN `callout` CHAR(20))
+    NO SQL
+SELECT
+	Droppable
+FROM 
+	element
+WHERE
+	name = callout$$
+DELIMITER ;
