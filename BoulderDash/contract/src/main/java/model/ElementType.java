@@ -1,4 +1,4 @@
-package model.element;
+package model;
 
 public enum ElementType {
 	MONTIONLESS,

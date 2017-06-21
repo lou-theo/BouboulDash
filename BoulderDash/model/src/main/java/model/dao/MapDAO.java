@@ -6,74 +6,76 @@ import java.sql.SQLException;
 
 public class MapDAO extends AbstractDAO {
 
-	private String sqlHeight = "{call findHeight(?))";
-	private String sqlWidth = "(call findWidth(?))";
-	private String sqlTimer = "(call findTimer(?))";
-	private String sqlDiamondLeft = "(call findDiamondLeft(?))";
-	private int heightColumnIndex;
-	private int widthColumnIndex;
-	private int TimerColumnIndex;
-	private int diamondLeftColumnIndex;
+	private static String sqlHeight = "{call findHeight(?))";
+	private static String sqlWidth = "(call findWidth(?))";
+	private static String sqlTimer = "(call findTimer(?))";
+	private static String sqlDiamondLeft = "(call findDiamondLeft(?))";
+	private static int heightColumnIndex = 1;
+	private static int widthColumnIndex = 1;
+	private static int TimerColumnIndex = 1;
+	private static int diamondLeftColumnIndex = 1;
 
-	public int getHeight(int level) throws SQLException {
+	public static int getHeight(int level) throws SQLException {
 		final CallableStatement callStatement = prepareCall(sqlHeight);
 		int height = 0;
 		callStatement.setInt(1, level);
 
-		 if (callStatement.execute()) {
-	            final ResultSet result = callStatement.getResultSet();
-	            if (result.first()) {
-	                result.getInt(heightColumnIndex);
-	            }
-	            result.close();
-	        }
-		
+		if (callStatement.execute()) {
+			final ResultSet result = callStatement.getResultSet();
+			if (result.first()) {
+				result.getInt(heightColumnIndex);
+			}
+			result.close();
+		}
+
 		return height;
 	}
-	
-	public int getWidth(int level) throws SQLException {
+
+	public static int getWidth(int level) throws SQLException {
 		final CallableStatement callStatement = prepareCall(sqlWidth);
 		int width = 0;
 		callStatement.setInt(1, level);
 
-		 if (callStatement.execute()) {
-	            final ResultSet result = callStatement.getResultSet();
-	            if (result.first()) {
-	                result.getInt(widthColumnIndex);
-	            }
-	            result.close();
-	        }
-		
+		if (callStatement.execute()) {
+			final ResultSet result = callStatement.getResultSet();
+			if (result.first()) {
+				result.getInt(widthColumnIndex);
+			}
+			result.close();
+		}
+
 		return width;
 	}
-	public int getTimer(int level) throws SQLException {
+
+	public static int getTimer(int level) throws SQLException {
 		final CallableStatement callStatement = prepareCall(sqlTimer);
 		int timer = 0;
 		callStatement.setInt(1, level);
 
-		 if (callStatement.execute()) {
-	            final ResultSet result = callStatement.getResultSet();
-	            if (result.first()) {
-	                result.getInt(TimerColumnIndex);
-	            }
-	            result.close();
-	        }
-		
+		if (callStatement.execute()) {
+			final ResultSet result = callStatement.getResultSet();
+			if (result.first()) {
+				result.getInt(TimerColumnIndex);
+			}
+			result.close();
+		}
+
 		return timer;
 	}
-	public int getDiamondLeft(int level) throws SQLException {
+
+	public static int getDiamondLeft(int level) throws SQLException {
 		final CallableStatement callStatement = prepareCall(sqlDiamondLeft);
 		int DiamondLeft = 0;
 		callStatement.setInt(1, level);
 
-		 if (callStatement.execute()) {
-	            final ResultSet result = callStatement.getResultSet();
-	            if (result.first()) {
-	                result.getInt(diamondLeftColumnIndex);
-	            }
-	            result.close();
-	        }
-		
+		if (callStatement.execute()) {
+			final ResultSet result = callStatement.getResultSet();
+			if (result.first()) {
+				result.getInt(diamondLeftColumnIndex);
+			}
+			result.close();
+		}
+
 		return DiamondLeft;
 	}
 

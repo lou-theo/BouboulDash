@@ -4,7 +4,6 @@ import java.sql.CallableStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.List; 
 
 public class BrickDAO extends AbstractDAO {
 
@@ -13,11 +12,9 @@ public class BrickDAO extends AbstractDAO {
 	private static int xColumnlndex = 2;
 	private static int yColumnlndex = 3;
 
-	ArrayList<Brick> bricks;
-
-	public static List<Brick> getAllbricks(int level) throws SQLException {
-		final ArrayList<Brick> bricks = new ArrayList<Brick>();
-		final CallableStatement callStatement = prepareCall(sqlAllBricks);
+	public static ArrayList<Brick> getAllbricks(int level) throws SQLException {
+		ArrayList<Brick> bricks = new ArrayList<Brick>();
+		CallableStatement callStatement = prepareCall(sqlAllBricks);
 		callStatement.setInt(1, level);
 
 		if (callStatement.execute()) {

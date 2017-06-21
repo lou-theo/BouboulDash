@@ -8,5 +8,9 @@ package model;
  */
 public interface IModel {
 
+	ICounter getCounter();
+	
+	ITimer getTimer();
     
+	IMap getMap();
 }

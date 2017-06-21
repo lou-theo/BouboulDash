@@ -1,4 +1,4 @@
-package model.element;
+package model;
 
 import java.awt.Image;
 import java.io.File;

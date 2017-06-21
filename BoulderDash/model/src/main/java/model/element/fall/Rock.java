@@ -1,15 +1,17 @@
-package model.element.motionless;
+package model.element.fall;
 
+import model.IMap;
 import model.Permeability;
 import model.Sprite;
 
-public class SuperWall extends MotionLessElement {
+public class Rock extends Fall {
+
 	private static char CODE;
-	private static String NAME = "SuperWall";
+	private static String NAME;
 	private static Permeability PERMEABILITY;
 	
-	public SuperWall() {
-		super(new Sprite(CODE, NAME), PERMEABILITY);
+	public Rock(int x, int y, IMap map) {
+		super(x, y, new Sprite(CODE, NAME), map, PERMEABILITY);
 	}
 
 	public static char getCODE() {
@@ -35,4 +37,5 @@ public class SuperWall extends MotionLessElement {
 	public static void setPERMEABILITY(Permeability pERMEABILITY) {
 		PERMEABILITY = pERMEABILITY;
 	}
+
 }

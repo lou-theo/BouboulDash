@@ -1,7 +1,7 @@
 package model.element.motionless;
 
-import model.element.Permeability;
-import model.element.Sprite;
+import model.Permeability;
+import model.Sprite;
 
 public class Wall extends MotionLessElement {
 	private static char CODE;

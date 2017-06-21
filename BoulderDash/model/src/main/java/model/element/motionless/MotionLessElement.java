@@ -1,9 +1,9 @@
 package model.element.motionless;
 
+import model.ElementType;
+import model.Permeability;
+import model.Sprite;
 import model.element.Element;
-import model.element.ElementType;
-import model.element.Permeability;
-import model.element.Sprite;
 
 public abstract class MotionLessElement extends Element {
 

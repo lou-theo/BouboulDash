@@ -4,19 +4,21 @@ import java.sql.CallableStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
+import model.Permeability;
+
 public class ElementDAO extends AbstractDAO {
 
-	private String sqlCode = "{call findCode(?))";
-	private String sqlPermeability = "(call findPermeability(?))";
-	private String sqlValue = "(call findValue(?))";
-	private String sqlDrop = "(call findDrop(?))";
+	private static String sqlCode = "{call findCode(?))";
+	private static String sqlPermeability = "(call findPermeability(?))";
+	private static String sqlValue = "(call findValue(?))";
+	private static String sqlDrop = "(call findDrop(?))";
 	
-	private int codeColumnIndex;
-	private int permeabilityColumnIndex;
-	private int valueColumnIndex;
-	private int dropColumnIndex;
+	private static int codeColumnIndex = 1;
+	private static int permeabilityColumnIndex = 1;
+	private static int valueColumnIndex = 1;
+	private static int dropColumnIndex = 1;
 	
-	public char getCode(String name) throws SQLException {
+	public static char getCode(String name) throws SQLException {
 		final CallableStatement callStatement = prepareCall(sqlCode);
 		char code = ' ';
 		callStatement.setString(1, name);
@@ -32,7 +34,7 @@ public class ElementDAO extends AbstractDAO {
 		return code;
 	}
 	
-	public int getValue(String name) throws SQLException {
+	public static int getValue(String name) throws SQLException {
 		final CallableStatement callStatement = prepareCall(sqlValue);
 		int value = 0;
 		callStatement.setString(1, name);
@@ -47,7 +49,7 @@ public class ElementDAO extends AbstractDAO {
 		
 		return value;
 	}
-	public boolean getDrop(String name) throws SQLException {
+	public static boolean getDrop(String name) throws SQLException {
 		final CallableStatement callStatement = prepareCall(sqlDrop);
 		boolean drop = false;
 		callStatement.setString(1, name);
@@ -62,15 +64,33 @@ public class ElementDAO extends AbstractDAO {
 		
 		return drop;
 	}
-	public Permeability getPermeability(String name) throws SQLException {
+	public static Permeability getPermeability(String name) throws SQLException {
 		final CallableStatement callStatement = prepareCall(sqlPermeability);
-		Permeability permeability = null;
+		Permeability permeability = Permeability.PENETRABLE;
 		callStatement.setString(1, name);
 
 		 if (callStatement.execute()) {
 	            final ResultSet result = callStatement.getResultSet();
 	            if (result.first()) {
-	                result.getString(permeabilityColumnIndex);
+	                String permeable = result.getString(permeabilityColumnIndex);
+	                
+	                if (permeable == "PENETRABLE") {
+	                	permeability = Permeability.PENETRABLE;
+	                } else if (permeable == "BREAKABLE") {
+	                	permeability = Permeability.BREAKABLE;
+	                } else if (permeable == "PUSHABLE") {
+	                	permeability = Permeability.PUSHABLE;
+	                } else if (permeable == "COLLECTABLE") {
+	                	permeability = Permeability.COLLECTABLE;
+	                } else if (permeable == "SOLID") {
+	                	permeability = Permeability.SOLID;
+	                } else if (permeable == "ENTRY") {
+	                	permeability = Permeability.ENTRY;
+	                } else if (permeable == "UNBREAKABLE") {
+	                	permeability = Permeability.UNBREAKABLE;
+	                } else if (permeable == "LIVING") {
+	                	permeability = Permeability.LIVING;
+	                }
 	            }
 	            result.close();
 	        }

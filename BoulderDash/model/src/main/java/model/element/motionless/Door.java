@@ -1,11 +1,12 @@
 package model.element.motionless;
 
-import model.element.Permeability;
-import model.element.Sprite;
+import model.Permeability;
+import model.Sprite;
 
-public class Door extends MotionLessElement{
+public class Door extends MotionLessElement {
+
 	private static char CODE;
-	private static String NAME = "Door";
+	private static String NAME = "Mud";
 	private static Permeability PERMEABILITY;
 	
 	public Door() {
@@ -35,4 +36,5 @@ public class Door extends MotionLessElement{
 	public static void setPERMEABILITY(Permeability pERMEABILITY) {
 		PERMEABILITY = pERMEABILITY;
 	}
+
 }

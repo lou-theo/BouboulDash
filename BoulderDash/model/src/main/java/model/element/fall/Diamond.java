@@ -1,15 +1,16 @@
-package model.element.motionless;
+package model.element.fall;
 
+import model.IMap;
 import model.Permeability;
 import model.Sprite;
 
-public class SuperWall extends MotionLessElement {
+public class Diamond extends Fall {
 	private static char CODE;
-	private static String NAME = "SuperWall";
+	private static String NAME = "Diamond";
 	private static Permeability PERMEABILITY;
 	
-	public SuperWall() {
-		super(new Sprite(CODE, NAME), PERMEABILITY);
+	public Diamond(int x, int y, IMap map) {
+		super(x, y, new Sprite(CODE, NAME), map, PERMEABILITY);
 	}
 
 	public static char getCODE() {

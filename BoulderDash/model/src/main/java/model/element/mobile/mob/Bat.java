@@ -1,15 +1,19 @@
-package model.element.motionless;
+package model.element.mobile.mob;
 
+import model.IMap;
 import model.Permeability;
 import model.Sprite;
 
-public class SuperWall extends MotionLessElement {
+public class Bat extends Mob {
+
 	private static char CODE;
-	private static String NAME = "SuperWall";
+	private static String NAME;
+	private static int VALUE;
+	private static boolean DROP;
 	private static Permeability PERMEABILITY;
-	
-	public SuperWall() {
-		super(new Sprite(CODE, NAME), PERMEABILITY);
+
+	public Bat(int x, int y, IMap map) {
+		super(x, y, DROP, VALUE, new Sprite(CODE, NAME), map, PERMEABILITY);
 	}
 
 	public static char getCODE() {
@@ -28,6 +32,22 @@ public class SuperWall extends MotionLessElement {
 		NAME = nAME;
 	}
 
+	public static int getVALUE() {
+		return VALUE;
+	}
+
+	public static void setVALUE(int vALUE) {
+		VALUE = vALUE;
+	}
+
+	public static boolean isDROP() {
+		return DROP;
+	}
+
+	public static void setDROP(boolean dROP) {
+		DROP = dROP;
+	}
+
 	public static Permeability getPERMEABILITY() {
 		return PERMEABILITY;
 	}
@@ -35,4 +55,5 @@ public class SuperWall extends MotionLessElement {
 	public static void setPERMEABILITY(Permeability pERMEABILITY) {
 		PERMEABILITY = pERMEABILITY;
 	}
+
 }
