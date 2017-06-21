@@ -47,5 +47,13 @@ public class ViewFacade implements IView, Runnable, IEventPerformer {
 		
 	}
 
+	public IOrderPerformer getOrderPerformer() {
+		return orderPerformer;
+	}
+
+	public void setOrderPerformer(IOrderPerformer orderPerformer) {
+		this.orderPerformer = orderPerformer;
+	}
+
 	
 }
