@@ -4,5 +4,7 @@ public enum PassingState {
 	DIE,
 	PASS,
 	BLOCK,
-	ESCAPE
+	ESCAPE,
+	PUSH,
+	COLLECT
 }

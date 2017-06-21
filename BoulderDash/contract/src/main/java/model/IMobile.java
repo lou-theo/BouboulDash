@@ -4,7 +4,7 @@ import java.awt.Point;
 
 public interface IMobile {
 
-	boolean moveUp();
+	/*boolean moveUp();
 
 	boolean moveDown();
 
@@ -12,7 +12,7 @@ public interface IMobile {
 
 	boolean moveLeft();
 
-	void doNothing();
+	void doNothing();*/
 
 	void setHasMoved();
 
@@ -38,4 +38,5 @@ public interface IMobile {
 
 	Direction getDirection();
 
+	void setDirection(Direction direction);
 }

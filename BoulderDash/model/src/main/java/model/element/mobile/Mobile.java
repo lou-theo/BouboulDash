@@ -4,14 +4,12 @@ import java.awt.Point;
 
 import model.Direction;
 import model.ElementType;
-import model.IElement;
 import model.IMap;
 import model.IMobile;
 import model.PassingState;
 import model.Permeability;
 import model.Sprite;
 import model.element.Element;
-import model.element.motionless.MotionLessElementFactory;
 
 public abstract class Mobile extends Element implements IMobile {
 
@@ -39,7 +37,7 @@ public abstract class Mobile extends Element implements IMobile {
 	 * 
 	 * @see model.element.mobile.IMobile#moveUp()
 	 */
-	@Override
+	/*@Override
 	public boolean moveUp() {
 		boolean result = false;
 
@@ -55,11 +53,7 @@ public abstract class Mobile extends Element implements IMobile {
 		return result;
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see model.element.mobile.IMobile#moveDown()
-	 */
+	
 	@Override
 	public boolean moveDown() {
 		boolean result = false;
@@ -76,11 +70,7 @@ public abstract class Mobile extends Element implements IMobile {
 		return result;
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see model.element.mobile.IMobile#moveRight()
-	 */
+	
 	@Override
 	public boolean moveRight() {
 		boolean result = false;
@@ -97,11 +87,7 @@ public abstract class Mobile extends Element implements IMobile {
 		return result;
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see model.element.mobile.IMobile#moveLeft()
-	 */
+	
 	@Override
 	public boolean moveLeft() {
 		boolean result = false;
@@ -118,15 +104,11 @@ public abstract class Mobile extends Element implements IMobile {
 		return result;
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see model.element.mobile.IMobile#doNothing()
-	 */
+	
 	@Override
 	public void doNothing() {
 		this.setHasMoved();
-	}
+	}*/
 
 	/*
 	 * (non-Javadoc)
@@ -260,7 +242,7 @@ public abstract class Mobile extends Element implements IMobile {
 		return this.direction;
 	}
 
-	private void setDirection(Direction direction) {
+	public void setDirection(Direction direction) {
 		this.direction = direction;
 	}
 }

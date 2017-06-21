@@ -74,27 +74,28 @@ public class ElementDAO extends AbstractDAO {
 	            if (result.first()) {
 	                String permeable = result.getString(permeabilityColumnIndex);
 	                
+	                
 	                if (permeable == "PENETRABLE") {
 	                	permeability = Permeability.PENETRABLE;
-	                } else if (permeable == "BREAKABLE") {
+	                } else if (permeable.equals("BREAKABLE")) {
 	                	permeability = Permeability.BREAKABLE;
-	                } else if (permeable == "PUSHABLE") {
+	                } else if (permeable.equals("PUSHABLE")) {
 	                	permeability = Permeability.PUSHABLE;
-	                } else if (permeable == "COLLECTABLE") {
+	                } else if (permeable.equals("COLLECTABLE")) {
 	                	permeability = Permeability.COLLECTABLE;
-	                } else if (permeable == "SOLID") {
+	                } else if (permeable.equals("SOLID")) {
 	                	permeability = Permeability.SOLID;
-	                } else if (permeable == "ENTRY") {
+	                } else if (permeable.equals("ENTRY")) {
 	                	permeability = Permeability.ENTRY;
-	                } else if (permeable == "UNBREAKABLE") {
+	                } else if (permeable.equals("UNBREAKABLE")) {
 	                	permeability = Permeability.UNBREAKABLE;
-	                } else if (permeable == "LIVING") {
+	                } else if (permeable.equals("LIVING")) {
 	                	permeability = Permeability.LIVING;
 	                }
 	            }
 	            result.close();
 	        }
-		
+
 		return permeability;
 	}
 }

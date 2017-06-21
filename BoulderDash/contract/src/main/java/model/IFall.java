@@ -24,4 +24,8 @@ public interface IFall {
 
 	boolean isFallingLeft();
 
+	void setX(int i);
+
+	void setY(int i);
+
 }

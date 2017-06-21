@@ -6,7 +6,7 @@ import model.Sprite;
 public class Door extends MotionLessElement {
 
 	private static char CODE;
-	private static String NAME = "Mud";
+	private static String NAME = "Door";
 	private static Permeability PERMEABILITY;
 	
 	public Door() {

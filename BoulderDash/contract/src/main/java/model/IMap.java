@@ -34,5 +34,19 @@ public interface IMap {
 	void removeFall(IFall fall);
 
 	void removeFall(int x, int y);
+	
+	
+	boolean moveDown(IMobile mobile);
 
+	boolean moveUp(IMobile mobile);
+	
+	boolean moveRight(IMobile mobile);
+	
+	boolean moveLeft(IMobile mobile);
+	
+	boolean moveDown(IFall fall);
+	
+	boolean moveRight(IFall fall);
+	
+	boolean moveLeft(IFall fall);
 }

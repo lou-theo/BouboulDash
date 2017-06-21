@@ -40,7 +40,7 @@ public class Hero extends Mobile {
 		PERMEABILITY = pERMEABILITY;
 	}
 
-	public boolean moveDown() {
+	/*public boolean moveDown() {
 		return super.moveDown();
 	}
 
@@ -58,7 +58,7 @@ public class Hero extends Mobile {
 	
 	public void doNothing() {
 		super.doNothing();
-	}
+	}*/
 	
 	public void die() {
 		super.die();

@@ -30,8 +30,10 @@ public class Map extends Observable implements IMap {
 	private ArrayList<IFall> falls = new ArrayList<IFall>();
 	private ArrayList<IMob> mobs = new ArrayList<IMob>();
 	private IMobile myCharacter;
+	private IModel model;
 
-	public Map(int level) {
+	public Map(int level, IModel model) {
+		this.model = model;
 		try {
 			this.setHeight(MapDAO.getHeight(level));
 			this.setWidth(MapDAO.getWidth(level));
@@ -49,8 +51,6 @@ public class Map extends Observable implements IMap {
 		this.onTheMap = new IElement[this.getWidth()][this.getHeight()];
 		bricks = BrickDAO.getAllbricks(level);
 
-		
-		
 		for (Brick brick : bricks) {
 			if (brick.getCode() == Mud.getCODE()) {
 				setOnTheMapXY(MotionLessElementFactory.createMud(), brick.getX(), brick.getY());
@@ -91,13 +91,13 @@ public class Map extends Observable implements IMap {
 				setOnTheMapXY((IElement) fall, brick.getX(), brick.getY());
 				this.addFall(fall);
 			}
-			
+
 			else if (brick.getCode() == Hero.getCODE()) {
 				IMobile hero = new Hero(brick.getX(), brick.getY(), this);
 				setOnTheMapXY((IElement) hero, brick.getX(), brick.getY());
 				setMyCharacter(hero);
 			}
-			
+
 			else {
 
 				setOnTheMapXY(MotionLessElementFactory.createAir(), brick.getX(), brick.getY());
@@ -162,7 +162,7 @@ public class Map extends Observable implements IMap {
 	@Override
 	public void setMapHasChanged() {
 		this.setChanged();
-        this.notifyObservers();
+		this.notifyObservers();
 	}
 
 	/*
@@ -267,5 +267,278 @@ public class Map extends Observable implements IMap {
 	@Override
 	public void removeFall(int x, int y) {
 		// A FAIRE
+	}
+
+	public boolean moveDown(IMobile mobile) {
+		int x = mobile.getX();
+		int y = mobile.getY();
+		boolean result = false;
+		
+		mobile.setDirection(Direction.DOWN);
+
+		switch (isPassing(x, y + 1, ((IElement) mobile).getElementType())) {
+		case PASS:
+			this.setOnTheMapXY(this.getOnTheMapXY(x, y), x, y + 1);
+			this.setOnTheMapXY(MotionLessElementFactory.createAir(), x, y);
+			((IMobile) this.getOnTheMapXY(x, y + 1)).setY(y + 1);
+			
+			result = true;
+			break;
+		case DIE:
+			this.die(mobile);
+			break;
+		case PUSH:
+			/*if (this.moveDown((IFall) this.getOnTheMapXY(x, y + 1))) {
+				this.moveDown(mobile);
+			}
+			
+			result = true;*/ //IMPOSSIBLE MOVE
+			break;
+		case COLLECT:
+			this.setOnTheMapXY(this.getOnTheMapXY(x, y), x, y + 1);
+			this.setOnTheMapXY(MotionLessElementFactory.createAir(), x, y);
+			((IMobile) this.getOnTheMapXY(x, y + 1)).setY(y + 1);
+			
+			model.getCounter().addPoint(100);
+			model.getCounter().removeOneDiamond();
+			
+			result = true;
+			break;
+		case ESCAPE:
+			if (model.getCounter().getDiamondLeft() == 0) {
+				model.setWin(true);
+			}
+			break;
+		default:
+			break;
+		}
+
+		this.setMapHasChanged();
+		return result;
+	}
+
+	public boolean moveUp(IMobile mobile) {
+		int x = mobile.getX();
+		int y = mobile.getY();
+		boolean result = false;
+		
+		mobile.setDirection(Direction.UP);
+
+		switch (isPassing(x, y - 1, ((IElement) mobile).getElementType())) {
+		case PASS:
+			this.setOnTheMapXY(this.getOnTheMapXY(x, y), x, y - 1);
+			this.setOnTheMapXY(MotionLessElementFactory.createAir(), x, y);
+			((IMobile) this.getOnTheMapXY(x, y - 1)).setY(y - 1);
+			
+			result = true;
+			break;
+		case DIE:
+			this.die(mobile);
+			break;
+		case PUSH:
+			/*if (this.moveUp((IFall) this.getOnTheMapXY(x, y + 1))) {
+				this.moveUp(mobile);
+			}
+			
+			result = true;*/ //IMPOSSIBLE MOVE
+			break;
+		case COLLECT:
+			this.setOnTheMapXY(this.getOnTheMapXY(x, y), x, y - 1);
+			this.setOnTheMapXY(MotionLessElementFactory.createAir(), x, y);
+			((IMobile) this.getOnTheMapXY(x, y - 1)).setY(y - 1);
+			
+			model.getCounter().addPoint(100);
+			model.getCounter().removeOneDiamond();
+			
+			result = true;
+			break;
+		case ESCAPE:
+			if (model.getCounter().getDiamondLeft() == 0) {
+				model.setWin(true);
+			}
+			break;
+		default:
+			break;
+		}
+
+		this.setMapHasChanged();
+		return result;
+	}
+
+	public boolean moveRight(IMobile mobile) {
+		int x = mobile.getX();
+		int y = mobile.getY();
+		boolean result = false;
+		
+		mobile.setDirection(Direction.RIGHT);
+
+		switch (isPassing(x + 1, y, ((IElement) mobile).getElementType())) {
+		case PASS:
+			this.setOnTheMapXY(this.getOnTheMapXY(x, y), x + 1, y);
+			this.setOnTheMapXY(MotionLessElementFactory.createAir(), x, y);
+			((IMobile) this.getOnTheMapXY(x + 1, y)).setX(x + 1);
+			
+			result = true;
+			break;
+		case DIE:
+			this.die(mobile);
+			break;
+		case PUSH:
+			if (this.moveRight((IFall) this.getOnTheMapXY(x + 1, y))) {
+				this.moveRight(mobile);
+			}
+			
+			result = true;
+			break;
+		case COLLECT:
+			this.setOnTheMapXY(this.getOnTheMapXY(x, y), x + 1, y);
+			this.setOnTheMapXY(MotionLessElementFactory.createAir(), x, y);
+			((IMobile) this.getOnTheMapXY(x + 1, y)).setX(x + 1);
+			
+			model.getCounter().addPoint(100);
+			model.getCounter().removeOneDiamond();
+			
+			result = true;
+			break;
+		case ESCAPE:
+			if (model.getCounter().getDiamondLeft() == 0) {
+				model.setWin(true);
+			}
+			break;
+		default:
+			break;
+		}
+
+		this.setMapHasChanged();
+		return result;
+	}
+
+	public boolean moveLeft(IMobile mobile) {
+		int x = mobile.getX();
+		int y = mobile.getY();
+		boolean result = false;
+		
+		mobile.setDirection(Direction.RIGHT);
+
+		switch (isPassing(x - 1, y, ((IElement) mobile).getElementType())) {
+		case PASS:
+			this.setOnTheMapXY(this.getOnTheMapXY(x, y), x - 1, y);
+			this.setOnTheMapXY(MotionLessElementFactory.createAir(), x, y);
+			((IMobile) this.getOnTheMapXY(x - 1, y)).setX(x - 1);
+			
+			result = true;
+			break;
+		case DIE:
+			this.die(mobile);
+			break;
+		case PUSH:
+			if (this.moveLeft((IFall) this.getOnTheMapXY(x - 1, y))) {
+				this.moveLeft(mobile);
+			}
+			
+			result = true;
+			break;
+		case COLLECT:
+			this.setOnTheMapXY(this.getOnTheMapXY(x, y), x - 1, y);
+			this.setOnTheMapXY(MotionLessElementFactory.createAir(), x, y);
+			((IMobile) this.getOnTheMapXY(x - 1, y)).setX(x - 1);
+			
+			model.getCounter().addPoint(100);
+			model.getCounter().removeOneDiamond();
+			
+			result = true;
+			break;
+		case ESCAPE:
+			if (model.getCounter().getDiamondLeft() == 0) {
+				model.setWin(true);
+			}
+			break;
+		default:
+			break;
+		}
+
+		this.setMapHasChanged();
+		return result;
+	}
+
+	private PassingState isPassing(int x, int y, ElementType elementType) {
+		PassingState result = PassingState.BLOCK;
+		
+		if (elementType == ElementType.MONTIONLESS) {
+			// never has to happen
+		} else if (this.getOnTheMapXY(x, y).getPermeability() == Permeability.PENETRABLE) {
+			result = PassingState.PASS;
+		} else if (this.getOnTheMapXY(x, y).getPermeability() == Permeability.BREAKABLE
+				&& elementType == ElementType.HERO) {
+			result = PassingState.PASS;
+		} else if (this.getOnTheMapXY(x, y).getPermeability() == Permeability.LIVING
+				&& elementType == ElementType.HERO) {
+			result = PassingState.DIE;
+		} else if (this.getOnTheMapXY(x, y).getPermeability() == Permeability.COLLECTABLE
+				&& elementType == ElementType.HERO) {
+			result = PassingState.COLLECT;
+		} else if (this.getOnTheMapXY(x, y).getPermeability() == Permeability.PUSHABLE
+				&& elementType == ElementType.HERO) {
+			result = PassingState.PUSH;
+		} else if (this.getOnTheMapXY(x, y).getPermeability() == Permeability.ENTRY
+				&& elementType == ElementType.HERO) {
+			result = PassingState.ESCAPE;
+		} else {
+			result = PassingState.BLOCK;
+		}
+
+		return result;
+	}
+
+	public boolean moveDown(IFall fall) {
+		int x = fall.getX();
+		int y = fall.getY();
+		boolean result = false;
+
+		if (this.getOnTheMapXY(x, y + 1).getPermeability() == Permeability.PENETRABLE) {
+			this.setOnTheMapXY(this.getOnTheMapXY(x, y), x, y + 1);
+			this.setOnTheMapXY(MotionLessElementFactory.createAir(), x, y);
+			((IFall) this.getOnTheMapXY(x, y + 1)).setY(y + 1);
+			result = true;
+		}
+
+		this.setMapHasChanged();
+		return result;
+	}
+	
+	public boolean moveRight(IFall fall) {
+		int x = fall.getX();
+		int y = fall.getY();
+		boolean result = false;
+
+		if (this.getOnTheMapXY(x + 1, y).getPermeability() == Permeability.PENETRABLE) {
+			this.setOnTheMapXY(this.getOnTheMapXY(x, y), x + 1, y);
+			this.setOnTheMapXY(MotionLessElementFactory.createAir(), x, y);
+			((IFall) this.getOnTheMapXY(x + 1, y)).setX(x + 1);
+			result = true;
+		}
+
+		this.setMapHasChanged();
+		return result;
+	}
+	
+	public boolean moveLeft(IFall fall) {
+		int x = fall.getX();
+		int y = fall.getY();
+		boolean result = false;
+
+		if (this.getOnTheMapXY(x - 1, y).getPermeability() == Permeability.PENETRABLE) {
+			this.setOnTheMapXY(this.getOnTheMapXY(x, y), x - 1, y);
+			this.setOnTheMapXY(MotionLessElementFactory.createAir(), x, y);
+			((IFall) this.getOnTheMapXY(x - 1, y)).setX(x - 1);
+			result = true;
+		}
+
+		this.setMapHasChanged();
+		return result;
+	}
+	
+	private void die(IMobile mobile) {
+		
 	}
 }

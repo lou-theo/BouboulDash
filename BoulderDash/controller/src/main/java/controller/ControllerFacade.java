@@ -11,7 +11,7 @@ import view.IView;
  */
 public class ControllerFacade implements IController, IOrderPerformer {
 
-	private static int TIME_SLEEP = 500;
+	private static int TIME_SLEEP = 250;
 	private IModel model;
 	private IView view;
 	private UserOrder stackOrder;
@@ -64,16 +64,20 @@ public class ControllerFacade implements IController, IOrderPerformer {
 		
 		switch (this.getStackOrder()) {
 		case DOWN:
-			this.getModel().getMap().getMyCharacter().moveDown();
+			//this.getModel().getMap().getMyCharacter().moveDown();
+			this.getModel().getMap().moveDown(this.getModel().getMap().getMyCharacter());
 			break;
 		case UP:
-			this.getModel().getMap().getMyCharacter().moveUp();
+			//this.getModel().getMap().getMyCharacter().moveUp();
+			this.getModel().getMap().moveUp(this.getModel().getMap().getMyCharacter());
 			break;
 		case RIGHT:
-			this.getModel().getMap().getMyCharacter().moveRight();
+			//this.getModel().getMap().getMyCharacter().moveRight();
+			this.getModel().getMap().moveRight(this.getModel().getMap().getMyCharacter());
 			break;
 		case LEFT:
-			this.getModel().getMap().getMyCharacter().moveLeft();
+			//this.getModel().getMap().getMyCharacter().moveLeft();
+			this.getModel().getMap().moveLeft(this.getModel().getMap().getMyCharacter());
 			break;
 		default:
 			break;

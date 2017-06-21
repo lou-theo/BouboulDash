@@ -35,7 +35,7 @@ public abstract class Mob extends Mobile implements IMob {
 		this.value = value;
 	}
 	
-	public boolean moveDown() {
+	/*public boolean moveDown() {
 		return super.moveDown();
 	}
 
@@ -53,7 +53,7 @@ public abstract class Mob extends Mobile implements IMob {
 	
 	public void doNothing() {
 		super.doNothing();
-	}
+	}*/
 	
 	public void die() {
 		super.die();

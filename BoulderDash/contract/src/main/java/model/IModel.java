@@ -13,4 +13,8 @@ public interface IModel {
 	ITimer getTimer();
     
 	IMap getMap();
+	
+	boolean isWin();
+
+	void setWin(boolean win);
 }

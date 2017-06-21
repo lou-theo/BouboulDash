@@ -1,5 +1,6 @@
 package model;
 
+import java.io.IOException;
 import java.sql.SQLException;
 
 import model.dao.ElementDAO;
@@ -13,6 +14,7 @@ import model.element.mobile.mob.Monster;
 import model.element.mobile.mob.Spider;
 import model.element.motionless.Air;
 import model.element.motionless.Door;
+import model.element.motionless.MotionLessElementFactory;
 import model.element.motionless.Mud;
 import model.element.motionless.SuperWall;
 import model.element.motionless.Wall;
@@ -28,6 +30,7 @@ public class ModelFacade implements IModel {
     private ICounter counter;
     private ITimer timer;
     private IMap map;
+    private boolean win = false;
     
     public ModelFacade(int level) {
     	
@@ -36,14 +39,17 @@ public class ModelFacade implements IModel {
 			this.setCounter(new Counter(MapDAO.getDiamondLeft(level)));
 			this.setTimer(new Timer(MapDAO.getTimer(level)));
 			
-			this.setMap(new Map(level));
+			this.setMap(new Map(level, this));
 		} catch (SQLException e) {
 			System.out.println("Error during the Model Generation");
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
     }
     
-    private void instantiateValues() throws SQLException {
+    private void instantiateValues() throws SQLException, IOException {
     	Mud.setCODE(ElementDAO.getCode(Mud.getNAME()));
     	Mud.setPERMEABILITY(ElementDAO.getPermeability(Mud.getNAME()));
     	
@@ -65,7 +71,6 @@ public class ModelFacade implements IModel {
     	
     	Rock.setCODE(ElementDAO.getCode(Rock.getNAME()));
     	Rock.setPERMEABILITY(ElementDAO.getPermeability(Rock.getNAME()));
-    	
     	
     	Goblin.setCODE(ElementDAO.getCode(Goblin.getNAME()));
     	Goblin.setDROP(ElementDAO.getDrop(Goblin.getNAME()));
@@ -90,6 +95,9 @@ public class ModelFacade implements IModel {
 
     	Hero.setCODE(ElementDAO.getCode(Hero.getNAME()));
     	Hero.setPERMEABILITY(ElementDAO.getPermeability(Hero.getNAME()));
+    	
+    	// In order to have an Air Sprite
+    	MotionLessElementFactory.createAir().getSprite().loadImage();
     }
 
 	public ICounter getCounter() {
@@ -114,6 +122,14 @@ public class ModelFacade implements IModel {
 
 	private void setMap(IMap map) {
 		this.map = map;
+	}
+
+	public boolean isWin() {
+		return win;
+	}
+
+	public void setWin(boolean win) {
+		this.win = win;
 	}
 
     

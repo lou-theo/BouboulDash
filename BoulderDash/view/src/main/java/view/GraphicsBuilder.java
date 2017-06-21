@@ -1,12 +1,9 @@
 package view;
 
-import java.awt.Color;
 import java.awt.Graphics;
 
-import model.Direction;
 import model.ElementType;
 import model.IElement;
-import model.IMobile;
 import model.IModel;
 import view.gameframe.IGraphicsBuilder;
 
@@ -14,13 +11,15 @@ public class GraphicsBuilder implements IGraphicsBuilder {
 
 	private IModel model;
 	//private Image emptyMap;
-	private int globalHeight = 800;
-	private int globalWidth = 500;
 	private int squareSize = 32;
-	private int imageSize = 32;
+	//private int imageSize = 32;
+	private int globalHeight;
+	private int globalWidth;
 
 	public GraphicsBuilder(IModel model) {
 		this.setModel(model);
+		this.globalHeight = (this.getModel().getMap().getHeight() + 0) * this.squareSize;
+		this.globalWidth =  (this.getModel().getMap().getWidth() + 1) * this.squareSize;
 	}
 
 	@Override
@@ -31,7 +30,7 @@ public class GraphicsBuilder implements IGraphicsBuilder {
 	}
 
 	private void buildEmptyMap(Graphics graphics) {
-		graphics.drawRect(0, 0, getGlobalWidth(), getGlobalHeight());
+		graphics.fillRect(0, 0, getGlobalWidth(), getGlobalHeight());
 	}
 
 	private void drawElements(Graphics graphics) {
@@ -50,11 +49,11 @@ public class GraphicsBuilder implements IGraphicsBuilder {
 					this.drawHero(graphics, this.getModel().getMap().getOnTheMapXY(x, y), x, y);
 				}
 
-				System.out.print(this.getModel().getMap().getOnTheMapXY(x, y).getSprite().getConsoleImage());
+				//System.out.print(this.getModel().getMap().getOnTheMapXY(x, y).getSprite().getConsoleImage());
 			}
-			System.out.println("");
+			//System.out.println("");
 		}
-		System.out.println("\n");
+		//System.out.println("\n");
 	}
 
 	private void drawMotionLessElement(Graphics graphics, IElement element, int x, int y) {

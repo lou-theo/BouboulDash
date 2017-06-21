@@ -7,7 +7,7 @@ import model.Sprite;
 public class Rock extends Fall {
 
 	private static char CODE;
-	private static String NAME;
+	private static String NAME = "Rock";
 	private static Permeability PERMEABILITY;
 	
 	public Rock(int x, int y, IMap map) {

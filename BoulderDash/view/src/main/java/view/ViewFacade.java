@@ -33,6 +33,7 @@ public class ViewFacade implements IView, Runnable, IEventPerformer {
 				this.getModel().getMap().getOnTheMapXY(x, y).getSprite().loadImage();
 			}
 		}
+		
 
 		this.setGraphicsBuilder(new GraphicsBuilder(model));
 
