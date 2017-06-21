@@ -27,8 +27,8 @@ public class Map extends Observable implements IMap {
 	private int width;
 	private int height;
 	private IElement[][] onTheMap;
-	private ArrayList<IFall> falls;
-	private ArrayList<IMob> mobs;
+	private ArrayList<IFall> falls = new ArrayList<IFall>();
+	private ArrayList<IMob> mobs = new ArrayList<IMob>();
 	private IMobile myCharacter;
 
 	public Map(int level) {
@@ -46,9 +46,11 @@ public class Map extends Observable implements IMap {
 
 		ArrayList<Brick> bricks = new ArrayList<Brick>();
 
-		this.onTheMap = new IElement[MapDAO.getWidth(level)][MapDAO.getHeight(level)];
+		this.onTheMap = new IElement[this.getWidth()][this.getHeight()];
 		bricks = BrickDAO.getAllbricks(level);
 
+		
+		
 		for (Brick brick : bricks) {
 			if (brick.getCode() == Mud.getCODE()) {
 				setOnTheMapXY(MotionLessElementFactory.createMud(), brick.getX(), brick.getY());
@@ -89,11 +91,16 @@ public class Map extends Observable implements IMap {
 				setOnTheMapXY((IElement) fall, brick.getX(), brick.getY());
 				this.addFall(fall);
 			}
-
+			
 			else if (brick.getCode() == Hero.getCODE()) {
 				IMobile hero = new Hero(brick.getX(), brick.getY(), this);
 				setOnTheMapXY((IElement) hero, brick.getX(), brick.getY());
 				setMyCharacter(hero);
+			}
+			
+			else {
+
+				setOnTheMapXY(MotionLessElementFactory.createAir(), brick.getX(), brick.getY());
 			}
 		}
 
@@ -239,7 +246,7 @@ public class Map extends Observable implements IMap {
 	 */
 	@Override
 	public void addFall(IFall fall) {
-		this.getFalls().add(fall);
+		this.falls.add(fall);
 	}
 
 	/*

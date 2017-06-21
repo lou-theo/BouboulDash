@@ -43,10 +43,10 @@ public abstract class Mobile extends Element implements IMobile {
 	public boolean moveUp() {
 		boolean result = false;
 
-		if (this.isPassing(this.getX(), this.getY() + 1, this.getElementType()) == PassingState.PASS) {
-			this.getMap().setOnTheMapXY((IElement) this, this.getX(), this.getY() + 1);
+		if (this.isPassing(this.getX(), this.getY() - 1, this.getElementType()) == PassingState.PASS) {
 			this.getMap().setOnTheMapXY(MotionLessElementFactory.createAir(), this.getX(), this.getY());
-			this.setX(this.getY() + 1);
+			this.getMap().setOnTheMapXY((IElement) this, this.getX(), this.getY() - 1);
+			this.setX(this.getY() - 1);
 			this.setHasMoved();
 
 			result = true;
@@ -64,10 +64,10 @@ public abstract class Mobile extends Element implements IMobile {
 	public boolean moveDown() {
 		boolean result = false;
 
-		if (this.isPassing(this.getX(), this.getY() - 1, this.getElementType()) == PassingState.PASS) {
-			this.getMap().setOnTheMapXY((IElement) this, this.getX(), this.getY() - 1);
+		if (this.isPassing(this.getX(), this.getY() + 1, this.getElementType()) == PassingState.PASS) {
+			this.getMap().setOnTheMapXY((IElement) this, this.getX(), this.getY() + 1);
 			this.getMap().setOnTheMapXY(MotionLessElementFactory.createAir(), this.getX(), this.getY());
-			this.setX(this.getY() - 1);
+			this.setX(this.getY() + 1);
 			this.setHasMoved();
 
 			result = true;

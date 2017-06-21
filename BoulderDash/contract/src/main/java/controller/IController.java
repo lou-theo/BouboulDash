@@ -8,7 +8,7 @@ package controller;
  */
 public interface IController {
 
-	void play();
+	void play() throws InterruptedException;
 	
 
 	IOrderPerformer getOrderPerformer();

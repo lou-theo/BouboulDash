@@ -30,11 +30,13 @@ public class ModelFacade implements IModel {
     private IMap map;
     
     public ModelFacade(int level) {
-    	this.setMap(new Map(level));
+    	
     	try {
+			this.instantiateValues();
 			this.setCounter(new Counter(MapDAO.getDiamondLeft(level)));
 			this.setTimer(new Timer(MapDAO.getTimer(level)));
-			this.instantiateValues();
+			
+			this.setMap(new Map(level));
 		} catch (SQLException e) {
 			System.out.println("Error during the Model Generation");
 			e.printStackTrace();

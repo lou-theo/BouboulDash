@@ -7,7 +7,7 @@ import java.util.ArrayList;
 
 public class BrickDAO extends AbstractDAO {
 
-	private static String sqlAllBricks = "{call findAllAbricks(?)}";
+	private static String sqlAllBricks = "{call findAllBricks(?)}";
 	private static int codeColumnlndex = 1;
 	private static int xColumnlndex = 2;
 	private static int yColumnlndex = 3;

@@ -1,5 +1,7 @@
 package view;
 
+import controller.IOrderPerformer;
+
 /**
  * <h1>The Interface IView.</h1>
  *
@@ -9,6 +11,8 @@ package view;
 public interface IView {
 
     void displayMessage(String message);
+    
+    void setOrderPerformer(IOrderPerformer orderPerformer);
     
     void closeAll();
 	

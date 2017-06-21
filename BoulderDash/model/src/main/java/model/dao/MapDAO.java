@@ -6,10 +6,10 @@ import java.sql.SQLException;
 
 public class MapDAO extends AbstractDAO {
 
-	private static String sqlHeight = "{call findHeight(?))";
-	private static String sqlWidth = "(call findWidth(?))";
-	private static String sqlTimer = "(call findTimer(?))";
-	private static String sqlDiamondLeft = "(call findDiamondLeft(?))";
+	private static String sqlHeight = "{call findHeight(?)}";
+	private static String sqlWidth = "{call findWidth(?)}";
+	private static String sqlTimer = "{call findTimer(?)}";
+	private static String sqlDiamondLeft = "{call findDiamondToCollect(?)}";
 	private static int heightColumnIndex = 1;
 	private static int widthColumnIndex = 1;
 	private static int TimerColumnIndex = 1;
@@ -21,9 +21,9 @@ public class MapDAO extends AbstractDAO {
 		callStatement.setInt(1, level);
 
 		if (callStatement.execute()) {
-			final ResultSet result = callStatement.getResultSet();
+			ResultSet result = callStatement.getResultSet();
 			if (result.first()) {
-				result.getInt(heightColumnIndex);
+				height = result.getInt(heightColumnIndex);
 			}
 			result.close();
 		}
@@ -32,14 +32,14 @@ public class MapDAO extends AbstractDAO {
 	}
 
 	public static int getWidth(int level) throws SQLException {
-		final CallableStatement callStatement = prepareCall(sqlWidth);
+		CallableStatement callStatement = prepareCall(sqlWidth);
 		int width = 0;
 		callStatement.setInt(1, level);
 
 		if (callStatement.execute()) {
 			final ResultSet result = callStatement.getResultSet();
 			if (result.first()) {
-				result.getInt(widthColumnIndex);
+				width = result.getInt(widthColumnIndex);
 			}
 			result.close();
 		}
@@ -48,14 +48,14 @@ public class MapDAO extends AbstractDAO {
 	}
 
 	public static int getTimer(int level) throws SQLException {
-		final CallableStatement callStatement = prepareCall(sqlTimer);
+		CallableStatement callStatement = prepareCall(sqlTimer);
 		int timer = 0;
 		callStatement.setInt(1, level);
 
 		if (callStatement.execute()) {
 			final ResultSet result = callStatement.getResultSet();
 			if (result.first()) {
-				result.getInt(TimerColumnIndex);
+				timer = result.getInt(TimerColumnIndex);
 			}
 			result.close();
 		}
@@ -64,14 +64,14 @@ public class MapDAO extends AbstractDAO {
 	}
 
 	public static int getDiamondLeft(int level) throws SQLException {
-		final CallableStatement callStatement = prepareCall(sqlDiamondLeft);
+		CallableStatement callStatement = prepareCall(sqlDiamondLeft);
 		int DiamondLeft = 0;
 		callStatement.setInt(1, level);
 
 		if (callStatement.execute()) {
 			final ResultSet result = callStatement.getResultSet();
 			if (result.first()) {
-				result.getInt(diamondLeftColumnIndex);
+				DiamondLeft = result.getInt(diamondLeftColumnIndex);
 			}
 			result.close();
 		}

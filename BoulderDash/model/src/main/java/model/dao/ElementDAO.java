@@ -8,10 +8,10 @@ import model.Permeability;
 
 public class ElementDAO extends AbstractDAO {
 
-	private static String sqlCode = "{call findCode(?))";
-	private static String sqlPermeability = "(call findPermeability(?))";
-	private static String sqlValue = "(call findValue(?))";
-	private static String sqlDrop = "(call findDrop(?))";
+	private static String sqlCode = "{call findCode(?)}";
+	private static String sqlPermeability = "{call findPermeability(?)}";
+	private static String sqlValue = "{call findValue(?)}";
+	private static String sqlDrop = "{call findDrop(?)}";
 	
 	private static int codeColumnIndex = 1;
 	private static int permeabilityColumnIndex = 1;
@@ -30,7 +30,7 @@ public class ElementDAO extends AbstractDAO {
 	            }
 	            result.close();
 	        }
-		
+
 		return code;
 	}
 	
@@ -42,7 +42,7 @@ public class ElementDAO extends AbstractDAO {
 		 if (callStatement.execute()) {
 	            final ResultSet result = callStatement.getResultSet();
 	            if (result.first()) {
-	                result.getInt(valueColumnIndex);
+	            	value = result.getInt(valueColumnIndex);
 	            }
 	            result.close();
 	        }
@@ -57,7 +57,7 @@ public class ElementDAO extends AbstractDAO {
 		 if (callStatement.execute()) {
 	            final ResultSet result = callStatement.getResultSet();
 	            if (result.first()) {
-	                result.getBoolean(dropColumnIndex);
+	            	drop = result.getBoolean(dropColumnIndex);
 	            }
 	            result.close();
 	        }

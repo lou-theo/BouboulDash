@@ -16,17 +16,17 @@ public class GamePanel extends JPanel implements Observer {
 	private IGraphicsBuilder graphicsBuilder;
 	
 	public GamePanel(IGraphicsBuilder graphicsBuilder) {
-		
+		this.setGraphicsBuilder(graphicsBuilder);
 	}
 	
 	@Override
 	public void update(Observable o, Object arg) {
-		// TODO Auto-generated method stub
+		this.repaint();
 		
 	}
 	
 	public void paintComponent(Graphics graphics) {
-		
+		this.getGraphicsBuilder().applyModelToGraphics(graphics);
 	}
 
 	public Observable getObservable() {
