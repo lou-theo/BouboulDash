@@ -7,7 +7,7 @@ import model.Sprite;
 public class Spider extends Mob {
 
 	private static char CODE;
-	private static String NAME;
+	private static String NAME = "Spider";
 	private static int VALUE;
 	private static boolean DROP;
 	private static Permeability PERMEABILITY;

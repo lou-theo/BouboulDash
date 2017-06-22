@@ -96,8 +96,9 @@ public class ModelFacade implements IModel {
     	Hero.setCODE(ElementDAO.getCode(Hero.getNAME()));
     	Hero.setPERMEABILITY(ElementDAO.getPermeability(Hero.getNAME()));
     	
-    	// In order to have an Air Sprite
+    	// In order to have some indispensable Sprite
     	MotionLessElementFactory.createAir().getSprite().loadImage();
+    	Diamond.setSPRITE();
     }
 
 	public ICounter getCounter() {
@@ -120,7 +121,7 @@ public class ModelFacade implements IModel {
 		return map;
 	}
 
-	private void setMap(IMap map) {
+	private synchronized void setMap(IMap map) {
 		this.map = map;
 	}
 

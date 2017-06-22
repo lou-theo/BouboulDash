@@ -6,7 +6,7 @@ import model.Sprite;
 
 public class Monster extends Mob{
 	private static char CODE;
-	private static String NAME;
+	private static String NAME = "Monster";
 	private static int VALUE;
 	private static boolean DROP;
 	private static Permeability PERMEABILITY;

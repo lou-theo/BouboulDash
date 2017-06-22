@@ -10,7 +10,7 @@ public class Sprite {
 	private Image image;
 	private String imageName;
 	private char consoleImage;
-	private boolean imageLoaded;
+	private boolean imageLoaded = false;
 	
 	public Sprite(final char character, final String imageName) {
         this.setConsoleImage(character);

@@ -25,15 +25,11 @@ public interface IMap {
 
 	void removeMob(IMob mob);
 
-	void removeMob(int x, int y);
-
 	ArrayList<IFall> getFalls();
 
 	void addFall(IFall fall);
 
 	void removeFall(IFall fall);
-
-	void removeFall(int x, int y);
 	
 	
 	boolean moveDown(IMobile mobile);
@@ -49,4 +45,6 @@ public interface IMap {
 	boolean moveRight(IFall fall);
 	
 	boolean moveLeft(IFall fall);
+	
+	void die(IMobile mobile);
 }

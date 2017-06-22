@@ -7,7 +7,7 @@ import model.Sprite;
 public class Goblin extends Mob{
 
 	private static char CODE;
-	private static String NAME;
+	private static String NAME = "Goblin";
 	private static int VALUE;
 	private static boolean DROP;
 	private static Permeability PERMEABILITY;

@@ -212,7 +212,6 @@ public abstract class Mobile extends Element implements IMobile {
 	@Override
 	public void die() {
 		this.alive = false;
-		// EXPLOSION
 	}
 
 	/*

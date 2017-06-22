@@ -218,17 +218,7 @@ public class Map extends Observable implements IMap {
 	public void removeMob(IMob mob) {
 		this.getMobs().remove(mob);
 	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see model.IMap#removeMob(int, int)
-	 */
-	@Override
-	public void removeMob(int x, int y) {
-		// A FAIRE
-	}
-
+	
 	/*
 	 * (non-Javadoc)
 	 * 
@@ -246,7 +236,7 @@ public class Map extends Observable implements IMap {
 	 */
 	@Override
 	public void addFall(IFall fall) {
-		this.falls.add(fall);
+		this.getFalls().add(fall);
 	}
 
 	/*
@@ -259,21 +249,11 @@ public class Map extends Observable implements IMap {
 		this.getFalls().remove(fall);
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see model.IMap#removeFall(int, int)
-	 */
-	@Override
-	public void removeFall(int x, int y) {
-		// A FAIRE
-	}
-
 	public boolean moveDown(IMobile mobile) {
 		int x = mobile.getX();
 		int y = mobile.getY();
 		boolean result = false;
-		
+
 		mobile.setDirection(Direction.DOWN);
 
 		switch (isPassing(x, y + 1, ((IElement) mobile).getElementType())) {
@@ -281,27 +261,29 @@ public class Map extends Observable implements IMap {
 			this.setOnTheMapXY(this.getOnTheMapXY(x, y), x, y + 1);
 			this.setOnTheMapXY(MotionLessElementFactory.createAir(), x, y);
 			((IMobile) this.getOnTheMapXY(x, y + 1)).setY(y + 1);
-			
+
 			result = true;
 			break;
 		case DIE:
 			this.die(mobile);
 			break;
 		case PUSH:
-			/*if (this.moveDown((IFall) this.getOnTheMapXY(x, y + 1))) {
-				this.moveDown(mobile);
-			}
-			
-			result = true;*/ //IMPOSSIBLE MOVE
+			/*
+			 * if (this.moveDown((IFall) this.getOnTheMapXY(x, y + 1))) {
+			 * this.moveDown(mobile); }
+			 * 
+			 * result = true;
+			 */ // IMPOSSIBLE MOVE
 			break;
 		case COLLECT:
+			this.model.getCounter().addPoint(100);
+			this.model.getCounter().removeOneDiamond();
+			this.removeFall((IFall) this.getOnTheMapXY(x, y + 1));
+
 			this.setOnTheMapXY(this.getOnTheMapXY(x, y), x, y + 1);
 			this.setOnTheMapXY(MotionLessElementFactory.createAir(), x, y);
 			((IMobile) this.getOnTheMapXY(x, y + 1)).setY(y + 1);
-			
-			model.getCounter().addPoint(100);
-			model.getCounter().removeOneDiamond();
-			
+
 			result = true;
 			break;
 		case ESCAPE:
@@ -321,7 +303,7 @@ public class Map extends Observable implements IMap {
 		int x = mobile.getX();
 		int y = mobile.getY();
 		boolean result = false;
-		
+
 		mobile.setDirection(Direction.UP);
 
 		switch (isPassing(x, y - 1, ((IElement) mobile).getElementType())) {
@@ -329,27 +311,29 @@ public class Map extends Observable implements IMap {
 			this.setOnTheMapXY(this.getOnTheMapXY(x, y), x, y - 1);
 			this.setOnTheMapXY(MotionLessElementFactory.createAir(), x, y);
 			((IMobile) this.getOnTheMapXY(x, y - 1)).setY(y - 1);
-			
+
 			result = true;
 			break;
 		case DIE:
 			this.die(mobile);
 			break;
 		case PUSH:
-			/*if (this.moveUp((IFall) this.getOnTheMapXY(x, y + 1))) {
-				this.moveUp(mobile);
-			}
-			
-			result = true;*/ //IMPOSSIBLE MOVE
+			/*
+			 * if (this.moveUp((IFall) this.getOnTheMapXY(x, y + 1))) {
+			 * this.moveUp(mobile); }
+			 * 
+			 * result = true;
+			 */ // IMPOSSIBLE MOVE
 			break;
 		case COLLECT:
+			this.model.getCounter().addPoint(100);
+			this.model.getCounter().removeOneDiamond();
+			this.removeFall((IFall) this.getOnTheMapXY(x, y - 1));
+
 			this.setOnTheMapXY(this.getOnTheMapXY(x, y), x, y - 1);
 			this.setOnTheMapXY(MotionLessElementFactory.createAir(), x, y);
 			((IMobile) this.getOnTheMapXY(x, y - 1)).setY(y - 1);
-			
-			model.getCounter().addPoint(100);
-			model.getCounter().removeOneDiamond();
-			
+
 			result = true;
 			break;
 		case ESCAPE:
@@ -369,7 +353,7 @@ public class Map extends Observable implements IMap {
 		int x = mobile.getX();
 		int y = mobile.getY();
 		boolean result = false;
-		
+
 		mobile.setDirection(Direction.RIGHT);
 
 		switch (isPassing(x + 1, y, ((IElement) mobile).getElementType())) {
@@ -377,7 +361,7 @@ public class Map extends Observable implements IMap {
 			this.setOnTheMapXY(this.getOnTheMapXY(x, y), x + 1, y);
 			this.setOnTheMapXY(MotionLessElementFactory.createAir(), x, y);
 			((IMobile) this.getOnTheMapXY(x + 1, y)).setX(x + 1);
-			
+
 			result = true;
 			break;
 		case DIE:
@@ -387,17 +371,18 @@ public class Map extends Observable implements IMap {
 			if (this.moveRight((IFall) this.getOnTheMapXY(x + 1, y))) {
 				this.moveRight(mobile);
 			}
-			
+
 			result = true;
 			break;
 		case COLLECT:
+			this.model.getCounter().addPoint(100);
+			this.model.getCounter().removeOneDiamond();
+			this.removeFall((IFall) this.getOnTheMapXY(x + 1, y));
+
 			this.setOnTheMapXY(this.getOnTheMapXY(x, y), x + 1, y);
 			this.setOnTheMapXY(MotionLessElementFactory.createAir(), x, y);
 			((IMobile) this.getOnTheMapXY(x + 1, y)).setX(x + 1);
-			
-			model.getCounter().addPoint(100);
-			model.getCounter().removeOneDiamond();
-			
+
 			result = true;
 			break;
 		case ESCAPE:
@@ -417,15 +402,15 @@ public class Map extends Observable implements IMap {
 		int x = mobile.getX();
 		int y = mobile.getY();
 		boolean result = false;
-		
-		mobile.setDirection(Direction.RIGHT);
+
+		mobile.setDirection(Direction.LEFT);
 
 		switch (isPassing(x - 1, y, ((IElement) mobile).getElementType())) {
 		case PASS:
 			this.setOnTheMapXY(this.getOnTheMapXY(x, y), x - 1, y);
 			this.setOnTheMapXY(MotionLessElementFactory.createAir(), x, y);
 			((IMobile) this.getOnTheMapXY(x - 1, y)).setX(x - 1);
-			
+
 			result = true;
 			break;
 		case DIE:
@@ -435,17 +420,18 @@ public class Map extends Observable implements IMap {
 			if (this.moveLeft((IFall) this.getOnTheMapXY(x - 1, y))) {
 				this.moveLeft(mobile);
 			}
-			
+
 			result = true;
 			break;
 		case COLLECT:
+			this.model.getCounter().addPoint(100);
+			this.model.getCounter().removeOneDiamond();
+			this.removeFall((IFall) this.getOnTheMapXY(x - 1, y));
+
 			this.setOnTheMapXY(this.getOnTheMapXY(x, y), x - 1, y);
 			this.setOnTheMapXY(MotionLessElementFactory.createAir(), x, y);
 			((IMobile) this.getOnTheMapXY(x - 1, y)).setX(x - 1);
-			
-			model.getCounter().addPoint(100);
-			model.getCounter().removeOneDiamond();
-			
+
 			result = true;
 			break;
 		case ESCAPE:
@@ -463,7 +449,7 @@ public class Map extends Observable implements IMap {
 
 	private PassingState isPassing(int x, int y, ElementType elementType) {
 		PassingState result = PassingState.BLOCK;
-		
+
 		if (elementType == ElementType.MONTIONLESS) {
 			// never has to happen
 		} else if (this.getOnTheMapXY(x, y).getPermeability() == Permeability.PENETRABLE) {
@@ -481,8 +467,11 @@ public class Map extends Observable implements IMap {
 				&& elementType == ElementType.HERO) {
 			result = PassingState.PUSH;
 		} else if (this.getOnTheMapXY(x, y).getPermeability() == Permeability.ENTRY
-				&& elementType == ElementType.HERO) {
+				&& this.getOnTheMapXY(x, y).getElementType() == ElementType.HERO && elementType == ElementType.MOB) {
 			result = PassingState.ESCAPE;
+		} else if (this.getOnTheMapXY(x, y).getPermeability() == Permeability.LIVING
+				&& elementType == ElementType.HERO) {
+			result = PassingState.DIE;
 		} else {
 			result = PassingState.BLOCK;
 		}
@@ -500,12 +489,16 @@ public class Map extends Observable implements IMap {
 			this.setOnTheMapXY(MotionLessElementFactory.createAir(), x, y);
 			((IFall) this.getOnTheMapXY(x, y + 1)).setY(y + 1);
 			result = true;
+
+			if (this.getOnTheMapXY(x, y + 2).getPermeability() == Permeability.LIVING) {
+				((IMobile) this.getOnTheMapXY(x, y + 2)).die();
+			}
 		}
 
 		this.setMapHasChanged();
 		return result;
 	}
-	
+
 	public boolean moveRight(IFall fall) {
 		int x = fall.getX();
 		int y = fall.getY();
@@ -521,7 +514,7 @@ public class Map extends Observable implements IMap {
 		this.setMapHasChanged();
 		return result;
 	}
-	
+
 	public boolean moveLeft(IFall fall) {
 		int x = fall.getX();
 		int y = fall.getY();
@@ -537,8 +530,49 @@ public class Map extends Observable implements IMap {
 		this.setMapHasChanged();
 		return result;
 	}
-	
-	private void die(IMobile mobile) {
-		
+
+	public void die(IMobile mobile) {
+		mobile.die();
+		if (((IElement) mobile).getElementType() == ElementType.MOB) {
+			this.removeMob((IMob) mobile);
+			this.explosion(((IMob) mobile).isDroppable(), mobile);
+			
+			this.model.getCounter().addPoint(((IMob) mobile).getValue());
+		} else if (((IElement) mobile).getElementType() == ElementType.HERO) {
+			this.explosion(false, mobile);
+		}
+
+		this.setMapHasChanged();
+
+	}
+
+	private void explosion(boolean setDiamond, IMobile mobile) {
+		int x = mobile.getX();
+		int y = mobile.getY();
+
+		for (int i = -1; i < 2; i++) {
+			for (int j = -1; j < 2; j++) {
+				if (this.getOnTheMapXY(x + i, y + j).getPermeability() != Permeability.UNBREAKABLE
+						&& this.getOnTheMapXY(x + i, y + j).getPermeability() != Permeability.ENTRY) {
+					
+					if (this.getOnTheMapXY(x + i, y + j).getElementType() == ElementType.FALL) {
+						this.removeFall((IFall) this.getOnTheMapXY(x + i, y + j)); 
+					}
+					
+					if (setDiamond) {
+						IFall fall = FallFactory.createDiamond(x + i, y + j, this);
+						setOnTheMapXY((IElement) fall, x + i, y + j);
+						this.addFall(fall);
+					} else {
+						this.setOnTheMapXY(MotionLessElementFactory.createAir(), x + i, y + j);
+					}
+					
+					if (this.getOnTheMapXY(x + i, y + j).getPermeability() == Permeability.LIVING
+							&& i != 0 && j != 0) {
+						this.die((IMobile) getOnTheMapXY(x + i, y + j));
+					}
+				}
+			}
+		}
 	}
 }

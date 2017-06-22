@@ -8,9 +8,10 @@ public class Diamond extends Fall {
 	private static char CODE;
 	private static String NAME = "Diamond";
 	private static Permeability PERMEABILITY;
+	private static Sprite SPRITE = null;
 	
 	public Diamond(int x, int y, IMap map) {
-		super(x, y, new Sprite(CODE, NAME), map, PERMEABILITY);
+		super(x, y, SPRITE, map, PERMEABILITY);
 	}
 
 	public static char getCODE() {
@@ -35,5 +36,13 @@ public class Diamond extends Fall {
 
 	public static void setPERMEABILITY(Permeability pERMEABILITY) {
 		PERMEABILITY = pERMEABILITY;
+	}
+
+	public static Sprite getSPRITE() {
+		return SPRITE;
+	}
+
+	public static void setSPRITE() {
+		SPRITE = new Sprite(getCODE(), getNAME());
 	}
 }
