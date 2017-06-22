@@ -5,8 +5,10 @@ import java.util.Observable;
 public class Counter extends Observable implements ICounter {
 	private int point;
 	private int diamondLeft;
+	private IModel model;
 	
-	public Counter(int diamondLeft) {
+	public Counter(int diamondLeft, IModel model) {
+		this.model = model;
 		setDiamondLeft(diamondLeft);
 		setPoint(0);
 	}
@@ -60,8 +62,7 @@ public class Counter extends Observable implements ICounter {
 	 */
 	@Override
 	public void setCounterHasChanged() {
-		this.setChanged();
-        this.notifyObservers();
+		model.setModelChanged();
 	}
 	
 	/* (non-Javadoc)
@@ -69,6 +70,6 @@ public class Counter extends Observable implements ICounter {
 	 */
 	@Override
 	public Observable getObservable() {
-		return this;
+		return this.model.getObservable();
 	}
 }

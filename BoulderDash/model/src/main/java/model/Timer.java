@@ -4,8 +4,10 @@ import java.util.Observable;
 
 public class Timer extends Observable implements ITimer {
 	private int time;
+	private IModel model;
 	
-	public Timer(int time) {
+	public Timer(int time, IModel model) {
+		this.model = model;
 		setTime(time);
 	}
 
@@ -45,8 +47,7 @@ public class Timer extends Observable implements ITimer {
 	 */
 	@Override
 	public void setTimeHasChanged() {
-		this.setChanged();
-        this.notifyObservers();
+		this.model.setModelChanged();
 	}
 	
 	/* (non-Javadoc)
@@ -54,6 +55,6 @@ public class Timer extends Observable implements ITimer {
 	 */
 	@Override
 	public Observable getObservable() {
-		return this;
+		return this.model.getObservable();
 	}
 }

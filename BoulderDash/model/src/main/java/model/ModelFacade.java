@@ -2,6 +2,7 @@ package model;
 
 import java.io.IOException;
 import java.sql.SQLException;
+import java.util.Observable;
 
 import model.dao.ElementDAO;
 import model.dao.MapDAO;
@@ -25,7 +26,7 @@ import model.element.motionless.Wall;
  * @author Jean-Aymeric DIET jadiet@cesi.fr
  * @version 1.0
  */
-public class ModelFacade implements IModel {
+public class ModelFacade extends Observable implements IModel {
 
     private ICounter counter;
     private ITimer timer;
@@ -36,8 +37,8 @@ public class ModelFacade implements IModel {
     	
     	try {
 			this.instantiateValues();
-			this.setCounter(new Counter(MapDAO.getDiamondLeft(level)));
-			this.setTimer(new Timer(MapDAO.getTimer(level)));
+			this.setCounter(new Counter(MapDAO.getDiamondLeft(level), this));
+			this.setTimer(new Timer(MapDAO.getTimer(level), this));
 			
 			this.setMap(new Map(level, this));
 		} catch (SQLException e) {
@@ -133,5 +134,12 @@ public class ModelFacade implements IModel {
 		this.win = win;
 	}
 
+    public void setModelChanged() {
+		this.setChanged();
+		this.notifyObservers();
+    }
     
+    public Observable getObservable() {
+    	return this;
+    }
 }

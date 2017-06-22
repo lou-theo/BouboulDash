@@ -118,7 +118,11 @@ public class ControllerFacade implements IController, IOrderPerformer {
 			
 			
 		} else if (this.getModel().getMap().getOnTheMapXY(fall.getX() - 1, fall.getY() + 1)
-				.getPermeability() == Permeability.PENETRABLE) {
+				.getPermeability() == Permeability.PENETRABLE
+				&& this.getModel().getMap().getOnTheMapXY(fall.getX(), fall.getY() + 1)
+				.getPermeability() != Permeability.BREAKABLE
+				&& this.getModel().getMap().getOnTheMapXY(fall.getX(), fall.getY() + 1)
+				.getPermeability() != Permeability.LIVING) {
 			if (this.getModel().getMap().moveLeft(fall)) {
 				
 			} else if (this.getModel().getMap().getOnTheMapXY(fall.getX() + 1, fall.getY() + 1)

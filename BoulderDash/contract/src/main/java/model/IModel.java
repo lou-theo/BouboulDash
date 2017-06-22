@@ -1,5 +1,7 @@
 package model;
 
+import java.util.Observable;
+
 /**
  * <h1>The Interface IModel.</h1>
  *
@@ -17,4 +19,8 @@ public interface IModel {
 	boolean isWin();
 
 	void setWin(boolean win);
+	
+	void setModelChanged();
+    
+    public Observable getObservable();
 }

@@ -23,7 +23,7 @@ import model.element.motionless.Mud;
 import model.element.motionless.SuperWall;
 import model.element.motionless.Wall;
 
-public class Map extends Observable implements IMap {
+public class Map implements IMap {
 	private int width;
 	private int height;
 	private IElement[][] onTheMap;
@@ -161,8 +161,7 @@ public class Map extends Observable implements IMap {
 	 */
 	@Override
 	public void setMapHasChanged() {
-		this.setChanged();
-		this.notifyObservers();
+		this.model.setModelChanged();
 	}
 
 	/*
@@ -172,7 +171,7 @@ public class Map extends Observable implements IMap {
 	 */
 	@Override
 	public Observable getObservable() {
-		return this;
+		return this.model.getObservable();
 	}
 
 	/*

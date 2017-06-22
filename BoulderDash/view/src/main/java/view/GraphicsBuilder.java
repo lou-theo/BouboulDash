@@ -18,7 +18,7 @@ public class GraphicsBuilder implements IGraphicsBuilder {
 	// private int imageSize = 32;
 	private int globalHeight;
 	private int globalWidth;
-	private int displayHeight = 70;
+	private int displayHeight = 50;
 
 	public GraphicsBuilder(IModel model) {
 		this.setModel(model);
@@ -36,6 +36,20 @@ public class GraphicsBuilder implements IGraphicsBuilder {
 	private void buildEmptyMap(Graphics graphics) {
 		graphics.setColor(Color.WHITE);
 		graphics.fillRect(0, 0, getGlobalWidth(), getGlobalHeight());
+	}
+	
+	private void printTimer(Graphics graphics) {
+		graphics.setColor(Color.BLACK);
+		graphics.drawString(this.getModel().getTimer().getTime() + " sec", 
+				(globalWidth / 3) * 2, displayHeight / 2 + 5);
+	}
+	
+	private void printCounter(Graphics graphics) {
+		graphics.setColor(Color.BLACK);
+		graphics.drawString(this.getModel().getCounter().getPoint() + " points", 
+				(globalWidth / 10) * 1, (displayHeight / 3) * 1 + 5);
+		graphics.drawString(this.getModel().getCounter().getDiamondLeft() + " diamonds",
+				(globalWidth / 10) * 1, (displayHeight / 3) * 2 + 5);
 	}
 
 	private void drawElements(Graphics graphics) {
@@ -55,44 +69,47 @@ public class GraphicsBuilder implements IGraphicsBuilder {
 				}
 
 			}
+			
+			this.printCounter(graphics);
+			this.printTimer(graphics);
 		}
 	}
 
 	private void drawMotionLessElement(Graphics graphics, IElement element, int x, int y) {
-		graphics.drawImage(element.getImage(), x * this.squareSize, y * this.squareSize, null);
+		graphics.drawImage(element.getImage(), x * this.squareSize, y * this.squareSize + displayHeight, null);
 	}
 
 	private void drawMob(Graphics graphics, IElement element, int x, int y) {
-		graphics.drawImage(element.getImage(), x * this.squareSize, y * this.squareSize,
-				(1 + x) * this.squareSize, (1 + y) * this.squareSize, 0 * squareSize, 0 * squareSize,
-				(0 + 1) * squareSize, (0 + 1) * squareSize, null);
+		graphics.drawImage(element.getImage(), x * this.squareSize, y * this.squareSize + displayHeight,
+				(1 + x) * this.squareSize, (1 + y) * this.squareSize + displayHeight,
+				0 * squareSize, 0 * squareSize, (0 + 1) * squareSize, (0 + 1) * squareSize, null);
 	}
 
 	private void drawFall(Graphics graphics, IElement element, int x, int y) {
-		graphics.drawImage(element.getImage(), x * this.squareSize, y * this.squareSize, null);
+		graphics.drawImage(element.getImage(), x * this.squareSize, y * this.squareSize + displayHeight, null);
 	}
 
 	private void drawHero(Graphics graphics, IElement element, int x, int y) {
-		if (((IMobile)element).getDirection() == Direction.NONE) {
-			graphics.drawImage(element.getImage(), x * this.squareSize, y * this.squareSize,
-					(1 + x) * this.squareSize, (1 + y) * this.squareSize, 0 * squareSize, 0 * squareSize,
-					(0 + 1) * squareSize, (0 + 1) * squareSize, null);
-		} else if (((IMobile)element).getDirection() == Direction.UP) {
-			graphics.drawImage(element.getImage(), x * this.squareSize, y * this.squareSize,
-					(1 + x) * this.squareSize, (1 + y) * this.squareSize, 1 * squareSize, 0 * squareSize,
-					(1 + 1) * squareSize, (0 + 1) * squareSize, null);
-		} else if (((IMobile)element).getDirection() == Direction.RIGHT) {
-			graphics.drawImage(element.getImage(), x * this.squareSize, y * this.squareSize,
-					(1 + x) * this.squareSize, (1 + y) * this.squareSize, 2 * squareSize, 0 * squareSize,
-					(2 + 1) * squareSize, (0 + 1) * squareSize, null);
-		} else if (((IMobile)element).getDirection() == Direction.DOWN) {
-			graphics.drawImage(element.getImage(), x * this.squareSize, y * this.squareSize,
-					(1 + x) * this.squareSize, (1 + y) * this.squareSize, 3 * squareSize, 0 * squareSize,
-					(3 + 1) * squareSize, (0 + 1) * squareSize, null);
-		} else if (((IMobile)element).getDirection() == Direction.LEFT) {
-			graphics.drawImage(element.getImage(), x * this.squareSize, y * this.squareSize,
-					(1 + x) * this.squareSize, (1 + y) * this.squareSize, 4 * squareSize, 0 * squareSize,
-					(4 + 1) * squareSize, (0 + 1) * squareSize, null);
+		if (((IMobile) element).getDirection() == Direction.NONE) {
+			graphics.drawImage(element.getImage(), x * this.squareSize, y * this.squareSize + displayHeight,
+					(1 + x) * this.squareSize, (1 + y) * this.squareSize + displayHeight, 0 * squareSize,
+					0 * squareSize, (0 + 1) * squareSize, (0 + 1) * squareSize, null);
+		} else if (((IMobile) element).getDirection() == Direction.UP) {
+			graphics.drawImage(element.getImage(), x * this.squareSize, y * this.squareSize + displayHeight,
+					(1 + x) * this.squareSize, (1 + y) * this.squareSize + displayHeight, 1 * squareSize,
+					0 * squareSize, (1 + 1) * squareSize, (0 + 1) * squareSize, null);
+		} else if (((IMobile) element).getDirection() == Direction.RIGHT) {
+			graphics.drawImage(element.getImage(), x * this.squareSize, y * this.squareSize + displayHeight,
+					(1 + x) * this.squareSize, (1 + y) * this.squareSize + displayHeight, 2 * squareSize,
+					0 * squareSize, (2 + 1) * squareSize, (0 + 1) * squareSize, null);
+		} else if (((IMobile) element).getDirection() == Direction.DOWN) {
+			graphics.drawImage(element.getImage(), x * this.squareSize, y * this.squareSize + displayHeight,
+					(1 + x) * this.squareSize, (1 + y) * this.squareSize + displayHeight, 3 * squareSize,
+					0 * squareSize, (3 + 1) * squareSize, (0 + 1) * squareSize, null);
+		} else if (((IMobile) element).getDirection() == Direction.LEFT) {
+			graphics.drawImage(element.getImage(), x * this.squareSize, y * this.squareSize + displayHeight,
+					(1 + x) * this.squareSize, (1 + y) * this.squareSize + displayHeight, 4 * squareSize,
+					0 * squareSize, (4 + 1) * squareSize, (0 + 1) * squareSize, null);
 		}
 	}
 
