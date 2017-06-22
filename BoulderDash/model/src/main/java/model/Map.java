@@ -550,8 +550,8 @@ public class Map extends Observable implements IMap {
 		int x = mobile.getX();
 		int y = mobile.getY();
 
-		for (int i = -1; i < 2; i++) {
-			for (int j = -1; j < 2; j++) {
+		for (int i = 1; i > -2; i--) {
+			for (int j = 1; j > -2; j--) {
 				if (this.getOnTheMapXY(x + i, y + j).getPermeability() != Permeability.UNBREAKABLE
 						&& this.getOnTheMapXY(x + i, y + j).getPermeability() != Permeability.ENTRY) {
 					

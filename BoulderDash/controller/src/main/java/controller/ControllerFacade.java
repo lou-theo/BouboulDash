@@ -79,7 +79,7 @@ public class ControllerFacade implements IController, IOrderPerformer {
 			this.getModel().getMap().moveLeft(this.getModel().getMap().getMyCharacter());
 			break;
 		case SUICIDE:
-			this.getModel().getMap().die(this.getModel().getMap().getMyCharacter());
+			this.getModel().getMap().getMyCharacter().die();
 			break;
 		default:
 			break;
