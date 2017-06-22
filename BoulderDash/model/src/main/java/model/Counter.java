@@ -2,7 +2,7 @@ package model;
 
 import java.util.Observable;
 
-public class Counter extends Observable implements ICounter {
+public class Counter implements ICounter {
 	private int point;
 	private int diamondLeft;
 	private IModel model;

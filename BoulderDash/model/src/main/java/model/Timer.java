@@ -2,13 +2,19 @@ package model;
 
 import java.util.Observable;
 
-public class Timer extends Observable implements ITimer {
+public class Timer extends Thread implements ITimer {
 	private int time;
 	private IModel model;
 	
 	public Timer(int time, IModel model) {
 		this.model = model;
 		setTime(time);
+		
+		this.start();
+	}
+	
+	public void run() {
+		this.timeGo();
 	}
 
 	/* (non-Javadoc)
@@ -29,7 +35,12 @@ public class Timer extends Observable implements ITimer {
 	 */
 	@Override
 	public void timeGo() {
-		if (getTime() <= 0) {
+		while (getTime() > 0) {
+			try {
+				Thread.sleep(1000);
+			} catch (InterruptedException e) {
+				e.printStackTrace();
+			}
 			setTime(getTime() - 1);
 		}
 	}
