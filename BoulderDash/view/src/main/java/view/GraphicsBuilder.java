@@ -1,5 +1,6 @@
 package view;
 
+import java.awt.Color;
 import java.awt.Graphics;
 
 import model.Direction;
@@ -17,12 +18,12 @@ public class GraphicsBuilder implements IGraphicsBuilder {
 	// private int imageSize = 32;
 	private int globalHeight;
 	private int globalWidth;
-	private int displayHeight;
+	private int displayHeight = 70;
 
 	public GraphicsBuilder(IModel model) {
 		this.setModel(model);
-		this.globalHeight = ((this.getModel().getMap().getHeight() + 0) * this.squareSize) + displayHeight;
-		this.globalWidth = ((this.getModel().getMap().getWidth() + 1) * this.squareSize) + displayHeight;
+		this.globalHeight = ((this.getModel().getMap().getHeight() + 1) * this.squareSize) + displayHeight;
+		this.globalWidth = ((this.getModel().getMap().getWidth() + 0) * this.squareSize);
 	}
 
 	@Override
@@ -33,6 +34,7 @@ public class GraphicsBuilder implements IGraphicsBuilder {
 	}
 
 	private void buildEmptyMap(Graphics graphics) {
+		graphics.setColor(Color.WHITE);
 		graphics.fillRect(0, 0, getGlobalWidth(), getGlobalHeight());
 	}
 
