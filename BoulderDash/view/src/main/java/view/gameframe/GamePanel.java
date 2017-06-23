@@ -12,7 +12,6 @@ public class GamePanel extends JPanel implements Observer {
 	 * 
 	 */
 	private static final long serialVersionUID = 3094804353530880172L;
-	private Observable observable;
 	private IGraphicsBuilder graphicsBuilder;
 	
 	public GamePanel(IGraphicsBuilder graphicsBuilder) {
@@ -27,14 +26,6 @@ public class GamePanel extends JPanel implements Observer {
 	
 	public void paintComponent(Graphics graphics) {
 		this.getGraphicsBuilder().applyModelToGraphics(graphics);
-	}
-
-	public Observable getObservable() {
-		return observable;
-	}
-
-	public void setObservable(Observable observable) {
-		this.observable = observable;
 	}
 
 	public IGraphicsBuilder getGraphicsBuilder() {

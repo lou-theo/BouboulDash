@@ -60,7 +60,6 @@ public class Counter implements ICounter {
 	/* (non-Javadoc)
 	 * @see model.ICounter#setCounterHasChanged()
 	 */
-	@Override
 	public void setCounterHasChanged() {
 		model.setModelChanged();
 	}
@@ -68,7 +67,6 @@ public class Counter implements ICounter {
 	/* (non-Javadoc)
 	 * @see model.ICounter#getObservable()
 	 */
-	@Override
 	public Observable getObservable() {
 		return this.model.getObservable();
 	}

@@ -1,7 +1,5 @@
 package model;
 
-import java.util.Observable;
-
 public interface ITimer {
 
 	int getTime();
@@ -10,8 +8,5 @@ public interface ITimer {
 
 	boolean isTimeAway();
 
-	void setTimeHasChanged();
-
-	Observable getObservable();
-
+	void setGameFinished(boolean gameFinished);
 }

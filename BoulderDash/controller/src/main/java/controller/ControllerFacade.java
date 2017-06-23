@@ -55,8 +55,17 @@ public class ControllerFacade implements IController, IOrderPerformer {
 
 	@Override
 	public void play() throws InterruptedException {
-		while (this.getModel().getMap().getMyCharacter().isAlive() == true) {
+		while (this.getModel().getMap().getMyCharacter().isAlive() == true
+				&& this.getModel().getTimer().isTimeAway() == false
+				&& this.getModel().isWin() == false) {
 			this.gameLoop();
+		}
+		this.getModel().getTimer().setGameFinished(true);
+		
+		if (this.getModel().isWin()) {
+			this.getView().displayMessage("You Win !\nYou're so strong !");
+		} else {
+			this.getView().displayMessage("T'ES MORT BOLOSS");
 		}
 
 		this.getView().closeAll();

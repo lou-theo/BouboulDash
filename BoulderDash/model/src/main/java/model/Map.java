@@ -574,4 +574,20 @@ public class Map implements IMap {
 			}
 		}
 	}
+	
+	public boolean moveDown(IMob mob) {
+		return false;
+	}
+	
+	public boolean moveUp(IMob mob) {
+		return false;
+	}
+	
+	public boolean moveRight(IMob mob) {
+		return false;
+	}
+	
+	public boolean moveLeft(IMob mob) {
+		return false;
+	}
 }

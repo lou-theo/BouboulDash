@@ -13,9 +13,7 @@ import view.gameframe.IGraphicsBuilder;
 public class GraphicsBuilder implements IGraphicsBuilder {
 
 	private IModel model;
-	// private Image emptyMap;
 	private int squareSize = 32;
-	// private int imageSize = 32;
 	private int globalHeight;
 	private int globalWidth;
 	private int displayHeight = 50;

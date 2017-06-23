@@ -1,20 +1,6 @@
 package model;
 
-import java.awt.Point;
-
 public interface IMobile {
-
-	/*boolean moveUp();
-
-	boolean moveDown();
-
-	boolean moveRight();
-
-	boolean moveLeft();
-
-	void doNothing();*/
-
-	void setHasMoved();
 
 	int getX();
 
@@ -24,17 +10,9 @@ public interface IMobile {
 
 	void setY(int y);
 
-	Point getPosition();
-
-	IMap getMap();
-
-	void setMap(IMap map);
-
 	boolean isAlive();
 
 	void die();
-
-	PassingState isPassing(int x, int y, ElementType elementType);
 
 	Direction getDirection();
 

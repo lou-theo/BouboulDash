@@ -5,6 +5,7 @@ import java.util.Observable;
 public class Timer extends Thread implements ITimer {
 	private int time;
 	private IModel model;
+	private boolean gameFinished = false;
 	
 	public Timer(int time, IModel model) {
 		this.model = model;
@@ -35,7 +36,7 @@ public class Timer extends Thread implements ITimer {
 	 */
 	@Override
 	public void timeGo() {
-		while (getTime() > 0) {
+		while (getTime() > 0 && this.isGameFinished() == false) {
 			try {
 				Thread.sleep(1000);
 			} catch (InterruptedException e) {
@@ -56,7 +57,6 @@ public class Timer extends Thread implements ITimer {
 	/* (non-Javadoc)
 	 * @see model.ITimer#setTimeHasChanged()
 	 */
-	@Override
 	public void setTimeHasChanged() {
 		this.model.setModelChanged();
 	}
@@ -64,8 +64,15 @@ public class Timer extends Thread implements ITimer {
 	/* (non-Javadoc)
 	 * @see model.ITimer#getObservable()
 	 */
-	@Override
 	public Observable getObservable() {
 		return this.model.getObservable();
+	}
+
+	public boolean isGameFinished() {
+		return gameFinished;
+	}
+
+	public void setGameFinished(boolean gameFinished) {
+		this.gameFinished = gameFinished;
 	}
 }

@@ -39,28 +39,4 @@ public class Hero extends Mobile {
 	public static void setPERMEABILITY(Permeability pERMEABILITY) {
 		PERMEABILITY = pERMEABILITY;
 	}
-
-	/*public boolean moveDown() {
-		return super.moveDown();
-	}
-
-	public boolean moveUp() {
-		return super.moveUp();
-	}
-	
-	public boolean moveRight() {
-		return super.moveRight();
-	}
-	
-	public boolean moveLeft() {
-		return super.moveLeft();
-	}
-	
-	public void doNothing() {
-		super.doNothing();
-	}*/
-	
-	public void die() {
-		super.die();
-	}
 }

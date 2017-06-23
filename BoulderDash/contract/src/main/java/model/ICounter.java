@@ -1,7 +1,5 @@
 package model;
 
-import java.util.Observable;
-
 public interface ICounter {
 
 	int getPoint();
@@ -11,9 +9,5 @@ public interface ICounter {
 	void addPoint(int point);
 
 	void removeOneDiamond();
-
-	void setCounterHasChanged();
-
-	Observable getObservable();
 
 }

@@ -16,10 +16,6 @@ public class Sprite {
         this.setConsoleImage(character);
         this.setImageName(imageName + ".png");
     }
-
-    public Sprite(final char character) {
-        this(character, "noimage.jpg");
-    }
     
     public final Image getImage() {
         return this.image;

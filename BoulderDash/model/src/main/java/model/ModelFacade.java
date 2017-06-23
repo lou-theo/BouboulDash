@@ -122,7 +122,7 @@ public class ModelFacade extends Observable implements IModel {
 		return map;
 	}
 
-	private synchronized void setMap(IMap map) {
+	private void setMap(IMap map) {
 		this.map = map;
 	}
 

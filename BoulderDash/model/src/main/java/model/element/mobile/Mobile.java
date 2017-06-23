@@ -6,7 +6,6 @@ import model.Direction;
 import model.ElementType;
 import model.IMap;
 import model.IMobile;
-import model.PassingState;
 import model.Permeability;
 import model.Sprite;
 import model.element.Element;
@@ -30,94 +29,6 @@ public abstract class Mobile extends Element implements IMobile {
 		this.setX(x);
 		this.setY(y);
 		this.setDirection(direction);
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see model.element.mobile.IMobile#moveUp()
-	 */
-	/*@Override
-	public boolean moveUp() {
-		boolean result = false;
-
-		if (this.isPassing(this.getX(), this.getY() - 1, this.getElementType()) == PassingState.PASS) {
-			this.getMap().setOnTheMapXY(MotionLessElementFactory.createAir(), this.getX(), this.getY());
-			this.getMap().setOnTheMapXY((IElement) this, this.getX(), this.getY() - 1);
-			this.setX(this.getY() - 1);
-			this.setHasMoved();
-
-			result = true;
-		}
-
-		return result;
-	}
-
-	
-	@Override
-	public boolean moveDown() {
-		boolean result = false;
-
-		if (this.isPassing(this.getX(), this.getY() + 1, this.getElementType()) == PassingState.PASS) {
-			this.getMap().setOnTheMapXY((IElement) this, this.getX(), this.getY() + 1);
-			this.getMap().setOnTheMapXY(MotionLessElementFactory.createAir(), this.getX(), this.getY());
-			this.setX(this.getY() + 1);
-			this.setHasMoved();
-
-			result = true;
-		}
-
-		return result;
-	}
-
-	
-	@Override
-	public boolean moveRight() {
-		boolean result = false;
-
-		if (this.isPassing(this.getX() + 1, this.getY(), this.getElementType()) == PassingState.PASS) {
-			this.getMap().setOnTheMapXY((IElement) this, this.getX() + 1, this.getY());
-			this.getMap().setOnTheMapXY(MotionLessElementFactory.createAir(), this.getX(), this.getY());
-			this.setY(this.getX() + 1);
-			this.setHasMoved();
-
-			result = true;
-		}
-
-		return result;
-	}
-
-	
-	@Override
-	public boolean moveLeft() {
-		boolean result = false;
-
-		if (this.isPassing(this.getX() - 1, this.getY() + 1, this.getElementType()) == PassingState.PASS) {
-			this.getMap().setOnTheMapXY((IElement) this, this.getX() - 1, this.getY());
-			this.getMap().setOnTheMapXY(MotionLessElementFactory.createAir(), this.getX(), this.getY());
-			this.setY(this.getX() - 1);
-			this.setHasMoved();
-
-			result = true;
-		}
-
-		return result;
-	}
-
-	
-	@Override
-	public void doNothing() {
-		this.setHasMoved();
-	}*/
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see model.element.mobile.IMobile#setHasMoved()
-	 */
-	@Override
-	public void setHasMoved() {
-		this.getMap().setMapHasChanged();
 	}
 
 	/*
@@ -165,7 +76,6 @@ public abstract class Mobile extends Element implements IMobile {
 	 * 
 	 * @see model.element.mobile.IMobile#getPosition()
 	 */
-	@Override
 	public Point getPosition() {
 		return this.position;
 	}
@@ -179,7 +89,6 @@ public abstract class Mobile extends Element implements IMobile {
 	 * 
 	 * @see model.element.mobile.IMobile#getMap()
 	 */
-	@Override
 	public IMap getMap() {
 		return this.map;
 	}
@@ -189,7 +98,6 @@ public abstract class Mobile extends Element implements IMobile {
 	 * 
 	 * @see model.element.mobile.IMobile#setMap(model.IMap)
 	 */
-	@Override
 	public void setMap(IMap map) {
 		this.map = map;
 	}
@@ -212,23 +120,6 @@ public abstract class Mobile extends Element implements IMobile {
 	@Override
 	public void die() {
 		this.alive = false;
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see model.element.mobile.IMobile#isPassing(int, int,
-	 * model.element.ElementType)
-	 */
-	@Override
-	public PassingState isPassing(int x, int y, ElementType elementType) {
-		PassingState result = PassingState.PASS;
-		
-		if (this.getMap().getOnTheMapXY(x, y).getPermeability() == Permeability.PENETRABLE) {
-			result = PassingState.PASS;
-		}
-		
-		return result;
 	}
 
 	/*
