@@ -32,9 +32,9 @@ public class Menu extends Thread implements ActionListener  {
 	private JButton button = new JButton("Play !");
 	private MenuPanel pan = new MenuPanel();
 	
-	Dimension dimension = java.awt.Toolkit.getDefaultToolkit().getScreenSize();
-	int height = (int)dimension.getHeight();
-	int width  = (int)dimension.getWidth();
+	private Dimension dimension = java.awt.Toolkit.getDefaultToolkit().getScreenSize();
+	private int height = (int)dimension.getHeight();
+	private int width  = (int)dimension.getWidth();
 	private int menuHeight = 587;
 	private int menuWidth = 455;
 	
@@ -62,6 +62,8 @@ public class Menu extends Thread implements ActionListener  {
 	    button.setBounds(320, 500, 110, 50);
 	    combo.setBounds(140, 500, 150, 50);
 	    fen.setVisible(true);
+	    
+	    new MenuMusic("music/theme.wav");
 	}
 
 	@Override
@@ -90,5 +92,3 @@ public class Menu extends Thread implements ActionListener  {
 		}
 	}
 }
-
-/**/

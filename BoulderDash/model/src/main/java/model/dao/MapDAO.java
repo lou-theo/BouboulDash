@@ -116,6 +116,11 @@ public class MapDAO extends AbstractDAO {
 		return DiamondLeft;
 	}
 
+	/**
+	 * Get the different map ID in the database
+	 * @return all map's ID
+	 * @throws SQLException
+	 */
 	public static ArrayList<Integer> getAllLevels() throws SQLException {
 		ArrayList<Integer> levels = new ArrayList<Integer>();
 		CallableStatement callStatement = prepareCall(sqlAllLevels);
