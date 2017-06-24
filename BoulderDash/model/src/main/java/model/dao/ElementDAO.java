@@ -6,6 +6,12 @@ import java.sql.SQLException;
 
 import model.Permeability;
 
+/**
+ * <h1>The Class ElementDAO.</h1>
+ *
+ * @author Unchained Dragonfly
+ * @version 1.0
+ */
 public class ElementDAO extends AbstractDAO {
 
 	private static String sqlCode = "{call findCode(?)}";
@@ -18,6 +24,12 @@ public class ElementDAO extends AbstractDAO {
 	private static int valueColumnIndex = 1;
 	private static int dropColumnIndex = 1;
 	
+	/**
+	 * Get the code of the specified element
+	 * @param name
+	 * @return code element
+	 * @throws SQLException
+	 */
 	public static char getCode(String name) throws SQLException {
 		final CallableStatement callStatement = prepareCall(sqlCode);
 		char code = ' ';
@@ -34,6 +46,12 @@ public class ElementDAO extends AbstractDAO {
 		return code;
 	}
 	
+	/**
+	 * Get the value of the specified element
+	 * @param name
+	 * @return code value or 0 if the element has no value
+	 * @throws SQLException
+	 */
 	public static int getValue(String name) throws SQLException {
 		final CallableStatement callStatement = prepareCall(sqlValue);
 		int value = 0;
@@ -49,6 +67,12 @@ public class ElementDAO extends AbstractDAO {
 		
 		return value;
 	}
+	/**
+	 * Tell if the specified element drop diamonds when it die
+	 * @param name
+	 * @return true if the element drop diamonds
+	 * @throws SQLException
+	 */
 	public static boolean getDrop(String name) throws SQLException {
 		final CallableStatement callStatement = prepareCall(sqlDrop);
 		boolean drop = false;
@@ -64,6 +88,12 @@ public class ElementDAO extends AbstractDAO {
 		
 		return drop;
 	}
+	/**
+	 * Get the permeability of the specified element
+	 * @param name
+	 * @return permeability of specified element
+	 * @throws SQLException
+	 */
 	public static Permeability getPermeability(String name) throws SQLException {
 		final CallableStatement callStatement = prepareCall(sqlPermeability);
 		Permeability permeability = Permeability.PENETRABLE;

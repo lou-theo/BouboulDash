@@ -10,7 +10,14 @@ import model.IMobile;
 import model.IModel;
 import view.gameframe.IGraphicsBuilder;
 
+/**
+ * <h1>The Class GraphicsBuilder draws all the graphics in the panel.</h1>
+ *
+ * @author Unchained Dragonfly
+ * @version 1.0
+ */
 public class GraphicsBuilder implements IGraphicsBuilder {
+
 
 	private IModel model;
 	private int squareSize = 32;
@@ -18,12 +25,19 @@ public class GraphicsBuilder implements IGraphicsBuilder {
 	private int globalWidth;
 	private int displayHeight = 50;
 
+	/**
+	 * The constructor of GraphicsBuilder
+	 * @param model
+	 */
 	public GraphicsBuilder(IModel model) {
 		this.setModel(model);
 		this.globalHeight = ((this.getModel().getMap().getHeight() + 1) * this.squareSize) + displayHeight;
 		this.globalWidth = ((this.getModel().getMap().getWidth() + 0) * this.squareSize);
 	}
 
+	/* (non-Javadoc)
+	 * @see view.gameframe.IGraphicsBuilder#applyModelToGraphics(java.awt.Graphics)
+	 */
 	@Override
 	public void applyModelToGraphics(Graphics graphics) {
 		this.buildEmptyMap(graphics);
@@ -31,17 +45,29 @@ public class GraphicsBuilder implements IGraphicsBuilder {
 
 	}
 
+	/**
+	 * Clear the last graphics by drawing a white rectangle which size is the same as the screen
+	 * @param graphics
+	 */
 	private void buildEmptyMap(Graphics graphics) {
 		graphics.setColor(Color.WHITE);
 		graphics.fillRect(0, 0, getGlobalWidth(), getGlobalHeight());
 	}
 	
+	/**
+	 * Draw the Timer on the panel
+	 * @param graphics
+	 */
 	private void printTimer(Graphics graphics) {
 		graphics.setColor(Color.BLACK);
 		graphics.drawString(this.getModel().getTimer().getTime() + " sec", 
 				(globalWidth / 3) * 2, displayHeight / 2 + 5);
 	}
 	
+	/**
+	 * Draw the point counter and the number of diamonds left in the panel
+	 * @param graphics
+	 */
 	private void printCounter(Graphics graphics) {
 		graphics.setColor(Color.BLACK);
 		graphics.drawString(this.getModel().getCounter().getPoint() + " points", 
@@ -50,6 +76,10 @@ public class GraphicsBuilder implements IGraphicsBuilder {
 				(globalWidth / 10) * 1, (displayHeight / 3) * 2 + 5);
 	}
 
+	/**
+	 * Look at all the element one by one and choose and they have to be drawn
+	 * @param graphics
+	 */
 	private void drawElements(Graphics graphics) {
 		this.buildEmptyMap(graphics);
 
@@ -73,20 +103,48 @@ public class GraphicsBuilder implements IGraphicsBuilder {
 		}
 	}
 
+	/**
+	 * Draw a motionLess element at the given coordinate
+	 * @param graphics
+	 * @param element
+	 * @param x
+	 * @param y
+	 */
 	private void drawMotionLessElement(Graphics graphics, IElement element, int x, int y) {
 		graphics.drawImage(element.getImage(), x * this.squareSize, y * this.squareSize + displayHeight, null);
 	}
 
+	/**
+	 * Draw a mob at the given given coordinate
+	 * @param graphics
+	 * @param element
+	 * @param x
+	 * @param y
+	 */
 	private void drawMob(Graphics graphics, IElement element, int x, int y) {
 		graphics.drawImage(element.getImage(), x * this.squareSize, y * this.squareSize + displayHeight,
 				(1 + x) * this.squareSize, (1 + y) * this.squareSize + displayHeight,
 				0 * squareSize, 0 * squareSize, (0 + 1) * squareSize, (0 + 1) * squareSize, null);
 	}
 
+	/**
+	 * Draw a fall element at the given coordinate
+	 * @param graphics
+	 * @param element
+	 * @param x
+	 * @param y
+	 */
 	private void drawFall(Graphics graphics, IElement element, int x, int y) {
 		graphics.drawImage(element.getImage(), x * this.squareSize, y * this.squareSize + displayHeight, null);
 	}
 
+	/**
+	 * Draw the hero at the given coordinate and choose which sprite has to be drawn according to the direction
+	 * @param graphics
+	 * @param element
+	 * @param x
+	 * @param y
+	 */
 	private void drawHero(Graphics graphics, IElement element, int x, int y) {
 		if (((IMobile) element).getDirection() == Direction.NONE) {
 			graphics.drawImage(element.getImage(), x * this.squareSize, y * this.squareSize + displayHeight,
@@ -111,20 +169,34 @@ public class GraphicsBuilder implements IGraphicsBuilder {
 		}
 	}
 
+	/* (non-Javadoc)
+	 * @see view.gameframe.IGraphicsBuilder#getGlobalWidth()
+	 */
 	@Override
 	public int getGlobalWidth() {
 		return this.globalWidth;
 	}
 
+	/* (non-Javadoc)
+	 * @see view.gameframe.IGraphicsBuilder#getGlobalHeight()
+	 */
 	@Override
 	public int getGlobalHeight() {
 		return this.globalHeight;
 	}
 
+	/**
+	 * The getter of the model
+	 * @return model
+	 */
 	public IModel getModel() {
 		return model;
 	}
 
+	/**
+	 * The setter of the model
+	 * @param model
+	 */
 	public void setModel(IModel model) {
 		this.model = model;
 	}

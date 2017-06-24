@@ -5,6 +5,12 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
+/**
+ * <h1>The Class BrickDAO.</h1>
+ *
+ * @author Unchained Dragonfly
+ * @version 1.0
+ */
 public class BrickDAO extends AbstractDAO {
 
 	private static String sqlAllBricks = "{call findAllBricks(?)}";
@@ -12,6 +18,12 @@ public class BrickDAO extends AbstractDAO {
 	private static int xColumnlndex = 2;
 	private static int yColumnlndex = 3;
 
+	/**
+	 * Get all the map element in the form of bricks
+	 * @param level
+	 * @return all bricks of the specified level
+	 * @throws SQLException
+	 */
 	public static ArrayList<Brick> getAllbricks(int level) throws SQLException {
 		ArrayList<Brick> bricks = new ArrayList<Brick>();
 		CallableStatement callStatement = prepareCall(sqlAllBricks);

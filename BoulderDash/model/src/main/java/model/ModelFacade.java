@@ -33,6 +33,10 @@ public class ModelFacade extends Observable implements IModel {
     private IMap map;
     private boolean win = false;
     
+    /**
+     * The ModelFacade constructor
+     * @param level
+     */
     public ModelFacade(int level) {
     	
     	try {
@@ -50,6 +54,12 @@ public class ModelFacade extends Observable implements IModel {
 		}
     }
     
+    /**
+     * Instantiate all the value from the database to the different element (code, permeability,
+     * value, drop) and load some indispensable sprite
+     * @throws SQLException
+     * @throws IOException
+     */
     private void instantiateValues() throws SQLException, IOException {
     	Mud.setCODE(ElementDAO.getCode(Mud.getNAME()));
     	Mud.setPERMEABILITY(ElementDAO.getPermeability(Mud.getNAME()));
@@ -102,43 +112,76 @@ public class ModelFacade extends Observable implements IModel {
     	Diamond.setSPRITE();
     }
 
+	/* (non-Javadoc)
+	 * @see model.IModel#getCounter()
+	 */
 	public ICounter getCounter() {
 		return counter;
 	}
 
+	/**
+	 * The setter of the counter
+	 * @param counter
+	 */
 	private void setCounter(ICounter counter) {
 		this.counter = counter;
 	}
 
+	/* (non-Javadoc)
+	 * @see model.IModel#getTimer()
+	 */
 	public ITimer getTimer() {
 		return timer;
 	}
 
+	/**
+	 * The setter of the timer
+	 * @param timer
+	 */
 	private void setTimer(ITimer timer) {
 		this.timer = timer;
 	}
 
+	/* (non-Javadoc)
+	 * @see model.IModel#getMap()
+	 */
 	public IMap getMap() {
 		return map;
 	}
 
+	/**
+	 * The setter of the map
+	 * @param map
+	 */
 	private void setMap(IMap map) {
 		this.map = map;
 	}
 
+	/* (non-Javadoc)
+	 * @see model.IModel#isWin()
+	 */
 	public boolean isWin() {
 		return win;
 	}
 
+	/* (non-Javadoc)
+	 * @see model.IModel#setWin(boolean)
+	 */
 	public void setWin(boolean win) {
 		this.win = win;
 	}
 
+    /* (non-Javadoc)
+     * @see model.IModel#setModelChanged()
+     */
     public void setModelChanged() {
 		this.setChanged();
 		this.notifyObservers();
     }
     
+    /* (non-Javadoc)
+     * @see model.IModel#getObservable()
+     */
     public Observable getObservable() {
     	return this;
     }

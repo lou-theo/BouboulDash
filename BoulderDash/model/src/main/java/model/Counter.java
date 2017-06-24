@@ -7,6 +7,11 @@ public class Counter implements ICounter {
 	private int diamondLeft;
 	private IModel model;
 	
+	/**
+	 * The counter constructor
+	 * @param diamondLeft
+	 * @param model
+	 */
 	public Counter(int diamondLeft, IModel model) {
 		this.model = model;
 		setDiamondLeft(diamondLeft);
@@ -21,6 +26,10 @@ public class Counter implements ICounter {
 		return point;
 	}
 
+	/**
+	 * The setter of the counter's point
+	 * @param point
+	 */
 	private void setPoint(int point) {
 		this.point = point;
 		this.setCounterHasChanged();
@@ -34,6 +43,10 @@ public class Counter implements ICounter {
 		return diamondLeft;
 	}
 
+	/**
+	 * The setter of the number of diamonds to collect
+	 * @param diamondLeft
+	 */
 	private void setDiamondLeft(int diamondLeft) {
 		this.diamondLeft = diamondLeft;
 		this.setCounterHasChanged();
@@ -56,16 +69,17 @@ public class Counter implements ICounter {
 			setDiamondLeft(this.getDiamondLeft() - 1);
 		}
 	}
-	
-	/* (non-Javadoc)
-	 * @see model.ICounter#setCounterHasChanged()
+
+	/**
+	 * Tell to the view that the window has to been updated
 	 */
 	public void setCounterHasChanged() {
 		model.setModelChanged();
 	}
-	
-	/* (non-Javadoc)
-	 * @see model.ICounter#getObservable()
+
+	/**
+	 * Give the model
+	 * @return an observable : the model
 	 */
 	public Observable getObservable() {
 		return this.model.getObservable();

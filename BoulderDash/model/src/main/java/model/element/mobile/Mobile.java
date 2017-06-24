@@ -10,6 +10,12 @@ import model.Permeability;
 import model.Sprite;
 import model.element.Element;
 
+/**
+ * <h1>The Class Mobile.</h1>
+ *
+ * @author Unchained Dragonfly
+ * @version 1.0
+ */
 public abstract class Mobile extends Element implements IMobile {
 
 	private Point position;
@@ -17,12 +23,29 @@ public abstract class Mobile extends Element implements IMobile {
 	private IMap map;
 	private Direction direction;
 
+	/**
+	 * A poor constructor of Mobile, used only by the real Mobile constructor
+	 * @param sprite
+	 * @param map
+	 * @param permeability
+	 * @param elementType
+	 */
 	public Mobile(Sprite sprite, IMap map, Permeability permeability, ElementType elementType) {
 		super(sprite, permeability, elementType);
 		this.setMap(map);
 		this.setPosition(new Point());
 	}
 
+	/**
+	 * The real Mobile constructor, use a light Mobile constructor to work
+	 * @param x
+	 * @param y
+	 * @param direction
+	 * @param sprite
+	 * @param map
+	 * @param permeability
+	 * @param elementType
+	 */
 	public Mobile(int x, int y, Direction direction, Sprite sprite, IMap map, Permeability permeability,
 			ElementType elementType) {
 		this(sprite, map, permeability, elementType);
@@ -31,107 +54,97 @@ public abstract class Mobile extends Element implements IMobile {
 		this.setDirection(direction);
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see model.element.mobile.IMobile#getX()
+	/* (non-Javadoc)
+	 * @see model.IMobile#getX()
 	 */
 	@Override
 	public int getX() {
 		return this.getPosition().x;
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see model.element.mobile.IMobile#setX(int)
+	/* (non-Javadoc)
+	 * @see model.IMobile#setX(int)
 	 */
 	@Override
 	public void setX(int x) {
 		this.getPosition().x = x;
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see model.element.mobile.IMobile#getY()
+	/* (non-Javadoc)
+	 * @see model.IMobile#getY()
 	 */
 	@Override
 	public int getY() {
 		return this.getPosition().y;
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see model.element.mobile.IMobile#setY(int)
+	/* (non-Javadoc)
+	 * @see model.IMobile#setY(int)
 	 */
 	@Override
 	public void setY(int y) {
 		this.getPosition().y = y;
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see model.element.mobile.IMobile#getPosition()
+	/**
+	 * The getter of the element position
+	 * @return Point position
 	 */
 	public Point getPosition() {
 		return this.position;
 	}
 
+	/**
+	 * The setter of the element position
+	 * @param Point position
+	 */
 	public void setPosition(Point position) {
 		this.position = position;
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see model.element.mobile.IMobile#getMap()
+	/**
+	 * The getter of the map
+	 * @return
 	 */
 	public IMap getMap() {
 		return this.map;
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see model.element.mobile.IMobile#setMap(model.IMap)
+	/**
+	 * The setter of the map
+	 * @param map
 	 */
 	public void setMap(IMap map) {
 		this.map = map;
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see model.element.mobile.IMobile#isAlive()
+	/* (non-Javadoc)
+	 * @see model.IMobile#isAlive()
 	 */
 	@Override
 	public boolean isAlive() {
 		return alive;
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see model.element.mobile.IMobile#die()
+	/* (non-Javadoc)
+	 * @see model.IMobile#die()
 	 */
 	@Override
 	public void die() {
 		this.alive = false;
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see model.element.mobile.IMobile#getDirection()
+	/* (non-Javadoc)
+	 * @see model.IMobile#getDirection()
 	 */
 	@Override
 	public Direction getDirection() {
 		return this.direction;
 	}
 
+	/* (non-Javadoc)
+	 * @see model.IMobile#setDirection(model.Direction)
+	 */
 	public void setDirection(Direction direction) {
 		this.direction = direction;
 	}

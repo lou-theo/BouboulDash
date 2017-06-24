@@ -7,6 +7,11 @@ public class Timer extends Thread implements ITimer {
 	private IModel model;
 	private boolean gameFinished = false;
 	
+	/**
+	 * The Timer constructor
+	 * @param time
+	 * @param model
+	 */
 	public Timer(int time, IModel model) {
 		this.model = model;
 		setTime(time);
@@ -14,6 +19,9 @@ public class Timer extends Thread implements ITimer {
 		this.start();
 	}
 	
+	/* (non-Javadoc)
+	 * @see java.lang.Thread#run()
+	 */
 	public void run() {
 		this.timeGo();
 	}
@@ -26,6 +34,10 @@ public class Timer extends Thread implements ITimer {
 		return time;
 	}
 
+	/**
+	 * The setter of the time given at the beginning of the level
+	 * @param time
+	 */
 	private void setTime(int time) {
 		this.time = time;
 		this.setTimeHasChanged();
@@ -54,24 +66,32 @@ public class Timer extends Thread implements ITimer {
 		return getTime() == 0;
 	}
 	
-	/* (non-Javadoc)
-	 * @see model.ITimer#setTimeHasChanged()
+	/**
+	 * Tell to the view that the window has to been updated
 	 */
 	public void setTimeHasChanged() {
 		this.model.setModelChanged();
 	}
 	
-	/* (non-Javadoc)
-	 * @see model.ITimer#getObservable()
+	/**
+	 * Give the model
+	 * @return an observable : the model
 	 */
 	public Observable getObservable() {
 		return this.model.getObservable();
 	}
 
+	/**
+	 * Tell if the game is finished or not
+	 * @return true if the game is over
+	 */
 	public boolean isGameFinished() {
 		return gameFinished;
 	}
 
+	/* (non-Javadoc)
+	 * @see model.ITimer#setGameFinished(boolean)
+	 */
 	public void setGameFinished(boolean gameFinished) {
 		this.gameFinished = gameFinished;
 	}

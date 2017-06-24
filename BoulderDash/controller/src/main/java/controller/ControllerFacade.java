@@ -19,40 +19,75 @@ public class ControllerFacade implements IController, IOrderPerformer {
 	private IView view;
 	private UserOrder stackOrder;
 
+	/**
+	 * The ModelFacade constructor
+	 * @param model
+	 * @param view
+	 */
 	public ControllerFacade(IModel model, IView view) {
 		this.setModel(model);
 		this.setView(view);
 		this.clearStackOrder();
 	}
 
+	/**
+	 * The getter of the model
+	 * @return model
+	 */
 	private IModel getModel() {
 		return model;
 	}
 
+	/**
+	 * The setter of the model
+	 * @param model
+	 */
 	private void setModel(IModel model) {
 		this.model = model;
 	}
 
+	/**
+	 * the getter of the view
+	 * @return view
+	 */
 	private IView getView() {
 		return view;
 	}
 
+	/**
+	 * The setter of the view
+	 * @param view
+	 */
 	private void setView(IView view) {
 		this.view = view;
 	}
 
+	/**
+	 * The setter of the stack order. The stack order stock the last order of the user
+	 * @param stackOrder
+	 */
 	private void setStackOrder(UserOrder stackOrder) {
 		this.stackOrder = stackOrder;
 	}
 
+	/**
+	 * The getter of the stackOrder
+	 * @return stackOrder
+	 */
 	private UserOrder getStackOrder() {
 		return stackOrder;
 	}
 
+	/**
+	 * Set to "NOP" the current stackOrder
+	 */
 	private void clearStackOrder() {
 		this.stackOrder = UserOrder.NOP;
 	}
 
+	/* (non-Javadoc)
+	 * @see controller.IController#play()
+	 */
 	@Override
 	public void play() throws InterruptedException {
 		while (this.getModel().getMap().getMyCharacter().isAlive() == true
@@ -71,30 +106,15 @@ public class ControllerFacade implements IController, IOrderPerformer {
 		this.getView().closeAll();
 	}
 
+	/**
+	 * Launch by play method, run while the loop of the game didn't stop
+	 * Makes move the different elements which are able to move one per one
+	 * @throws InterruptedException
+	 */
 	private void gameLoop() throws InterruptedException {
 		Thread.sleep(TIME_SLEEP);
 
-		switch (this.getStackOrder()) {
-		case DOWN:
-			this.getModel().getMap().moveDown(this.getModel().getMap().getMyCharacter());
-			break;
-		case UP:
-			this.getModel().getMap().moveUp(this.getModel().getMap().getMyCharacter());
-			break;
-		case RIGHT:
-			this.getModel().getMap().moveRight(this.getModel().getMap().getMyCharacter());
-			break;
-		case LEFT:
-			this.getModel().getMap().moveLeft(this.getModel().getMap().getMyCharacter());
-			break;
-		case SUICIDE:
-			this.getModel().getMap().getMyCharacter().die();
-			break;
-		default:
-			break;
-		}
-
-		this.clearStackOrder();
+		this.moveHero();
 
 		for (IFall fall : this.getModel().getMap().getFalls()) {
 			this.moveFall(fall);
@@ -118,10 +138,45 @@ public class ControllerFacade implements IController, IOrderPerformer {
 		
 	}
 
+	/**
+	 * Move the Hero according to the StackOrder and the clear the stackOrder
+	 */
+	public void moveHero() {
+		switch (this.getStackOrder()) {
+		case DOWN:
+			this.getModel().getMap().moveDown(this.getModel().getMap().getMyCharacter());
+			break;
+		case UP:
+			this.getModel().getMap().moveUp(this.getModel().getMap().getMyCharacter());
+			break;
+		case RIGHT:
+			this.getModel().getMap().moveRight(this.getModel().getMap().getMyCharacter());
+			break;
+		case LEFT:
+			this.getModel().getMap().moveLeft(this.getModel().getMap().getMyCharacter());
+			break;
+		case SUICIDE:
+			this.getModel().getMap().getMyCharacter().die();
+			break;
+		default:
+			break;
+		}
+
+		this.clearStackOrder();
+	}
+	
+	/**
+	 * Move the given mob according to his direction
+	 * @param mob
+	 */
 	public void moveMob(IMob mob) {
 
 	}
 
+	/**
+	 * Try to make fall the given fall element (a diamond or a rock)
+	 * @param fall
+	 */
 	public void moveFall(IFall fall) {
 		if (this.getModel().getMap().moveDown(fall)) {
 			
@@ -152,11 +207,17 @@ public class ControllerFacade implements IController, IOrderPerformer {
 		}
 	}
 
+	/* (non-Javadoc)
+	 * @see controller.IOrderPerformer#orderPerform(controller.UserOrder)
+	 */
 	@Override
 	public void orderPerform(UserOrder userOrder) {
 		this.setStackOrder(userOrder);
 	}
 
+	/* (non-Javadoc)
+	 * @see controller.IController#getOrderPerformer()
+	 */
 	@Override
 	public IOrderPerformer getOrderPerformer() {
 		return this;

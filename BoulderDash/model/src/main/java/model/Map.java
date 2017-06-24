@@ -32,6 +32,11 @@ public class Map implements IMap {
 	private IMobile myCharacter;
 	private IModel model;
 
+	/**
+	 * The map constructor
+	 * @param level
+	 * @param model
+	 */
 	public Map(int level, IModel model) {
 		this.model = model;
 		try {
@@ -44,6 +49,11 @@ public class Map implements IMap {
 		}
 	}
 
+	/**
+	 * Load the value from the database and generate the map according to the data
+	 * @param level
+	 * @throws SQLException
+	 */
 	private void loadMap(int level) throws SQLException {
 
 		ArrayList<Brick> bricks = new ArrayList<Brick>();
@@ -106,9 +116,8 @@ public class Map implements IMap {
 
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * 
+	
+	/* (non-Javadoc)
 	 * @see model.IMap#getWidth()
 	 */
 	@Override
@@ -116,13 +125,16 @@ public class Map implements IMap {
 		return width;
 	}
 
+	/**
+	 * The setter of the width of the map
+	 * @param width
+	 */
 	private void setWidth(int width) {
 		this.width = width;
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * 
+	
+	/* (non-Javadoc)
 	 * @see model.IMap#getHeight()
 	 */
 	@Override
@@ -130,13 +142,16 @@ public class Map implements IMap {
 		return height;
 	}
 
+	/**
+	 * The setter of the height of the map
+	 * @param height
+	 */
 	private void setHeight(int height) {
 		this.height = height;
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * 
+	
+	/* (non-Javadoc)
 	 * @see model.IMap#getOnTheMapXY(int, int)
 	 */
 	@Override
@@ -144,19 +159,17 @@ public class Map implements IMap {
 		return this.onTheMap[x][y];
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see model.IMap#setOnTheMapXY(model.element.IElement, int, int)
+	
+	/* (non-Javadoc)
+	 * @see model.IMap#setOnTheMapXY(model.IElement, int, int)
 	 */
 	@Override
 	public void setOnTheMapXY(final IElement element, final int x, final int y) {
 		this.onTheMap[x][y] = element;
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * 
+	
+	/* (non-Javadoc)
 	 * @see model.IMap#setMapHasChanged()
 	 */
 	@Override
@@ -164,9 +177,8 @@ public class Map implements IMap {
 		this.model.setModelChanged();
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * 
+	
+	/* (non-Javadoc)
 	 * @see model.IMap#getObservable()
 	 */
 	@Override
@@ -174,9 +186,8 @@ public class Map implements IMap {
 		return this.model.getObservable();
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * 
+	
+	/* (non-Javadoc)
 	 * @see model.IMap#getMyCharacter()
 	 */
 	@Override
@@ -184,13 +195,16 @@ public class Map implements IMap {
 		return this.myCharacter;
 	}
 
+	/**
+	 * The setter of the character, the Hero
+	 * @param myCharacter
+	 */
 	private void setMyCharacter(IMobile myCharacter) {
 		this.myCharacter = myCharacter;
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * 
+	
+	/* (non-Javadoc)
 	 * @see model.IMap#getMobs()
 	 */
 	@Override
@@ -198,29 +212,26 @@ public class Map implements IMap {
 		return this.mobs;
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see model.IMap#addMob(model.element.mobile.mob.IMob)
+	
+	/* (non-Javadoc)
+	 * @see model.IMap#addMob(model.IMob)
 	 */
 	@Override
 	public void addMob(IMob mob) {
 		this.getMobs().add(mob);
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see model.IMap#removeMob(model.element.mobile.mob.IMob)
+	
+	/* (non-Javadoc)
+	 * @see model.IMap#removeMob(model.IMob)
 	 */
 	@Override
 	public void removeMob(IMob mob) {
 		this.getMobs().remove(mob);
 	}
 	
-	/*
-	 * (non-Javadoc)
-	 * 
+	
+	/* (non-Javadoc)
 	 * @see model.IMap#getFalls()
 	 */
 	@Override
@@ -228,26 +239,27 @@ public class Map implements IMap {
 		return this.falls;
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see model.IMap#addFall(model.element.fall.IFall)
+	
+	/* (non-Javadoc)
+	 * @see model.IMap#addFall(model.IFall)
 	 */
 	@Override
 	public void addFall(IFall fall) {
 		this.getFalls().add(fall);
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see model.IMap#removeFall(model.element.fall.IFall)
+	
+	/* (non-Javadoc)
+	 * @see model.IMap#removeFall(model.IFall)
 	 */
 	@Override
 	public void removeFall(IFall fall) {
 		this.getFalls().remove(fall);
 	}
 
+	/* (non-Javadoc)
+	 * @see model.IMap#moveDown(model.IMobile)
+	 */
 	public boolean moveDown(IMobile mobile) {
 		int x = mobile.getX();
 		int y = mobile.getY();
@@ -298,6 +310,9 @@ public class Map implements IMap {
 		return result;
 	}
 
+	/* (non-Javadoc)
+	 * @see model.IMap#moveUp(model.IMobile)
+	 */
 	public boolean moveUp(IMobile mobile) {
 		int x = mobile.getX();
 		int y = mobile.getY();
@@ -348,6 +363,9 @@ public class Map implements IMap {
 		return result;
 	}
 
+	/* (non-Javadoc)
+	 * @see model.IMap#moveRight(model.IMobile)
+	 */
 	public boolean moveRight(IMobile mobile) {
 		int x = mobile.getX();
 		int y = mobile.getY();
@@ -397,6 +415,9 @@ public class Map implements IMap {
 		return result;
 	}
 
+	/* (non-Javadoc)
+	 * @see model.IMap#moveLeft(model.IMobile)
+	 */
 	public boolean moveLeft(IMobile mobile) {
 		int x = mobile.getX();
 		int y = mobile.getY();
@@ -446,6 +467,13 @@ public class Map implements IMap {
 		return result;
 	}
 
+	/**
+	 * Tell how will be an element of the given type at the given coordinate 
+	 * @param x
+	 * @param y
+	 * @param elementType
+	 * @return passingState
+	 */
 	private PassingState isPassing(int x, int y, ElementType elementType) {
 		PassingState result = PassingState.BLOCK;
 
@@ -478,6 +506,9 @@ public class Map implements IMap {
 		return result;
 	}
 
+	/* (non-Javadoc)
+	 * @see model.IMap#moveDown(model.IFall)
+	 */
 	public boolean moveDown(IFall fall) {
 		int x = fall.getX();
 		int y = fall.getY();
@@ -498,6 +529,9 @@ public class Map implements IMap {
 		return result;
 	}
 
+	/* (non-Javadoc)
+	 * @see model.IMap#moveRight(model.IFall)
+	 */
 	public boolean moveRight(IFall fall) {
 		int x = fall.getX();
 		int y = fall.getY();
@@ -514,6 +548,9 @@ public class Map implements IMap {
 		return result;
 	}
 
+	/* (non-Javadoc)
+	 * @see model.IMap#moveLeft(model.IFall)
+	 */
 	public boolean moveLeft(IFall fall) {
 		int x = fall.getX();
 		int y = fall.getY();
@@ -530,6 +567,9 @@ public class Map implements IMap {
 		return result;
 	}
 
+	/* (non-Javadoc)
+	 * @see model.IMap#die(model.IMobile)
+	 */
 	public void die(IMobile mobile) {
 		mobile.die();
 		if (((IElement) mobile).getElementType() == ElementType.MOB) {
@@ -545,6 +585,11 @@ public class Map implements IMap {
 
 	}
 
+	/**
+	 * Generate air if setDiamond is false and diamonds if true in the blast area of the given mobile
+	 * @param setDiamond
+	 * @param mobile
+	 */
 	private void explosion(boolean setDiamond, IMobile mobile) {
 		int x = mobile.getX();
 		int y = mobile.getY();
@@ -575,18 +620,30 @@ public class Map implements IMap {
 		}
 	}
 	
+	/* (non-Javadoc)
+	 * @see model.IMap#moveDown(model.IMob)
+	 */
 	public boolean moveDown(IMob mob) {
 		return false;
 	}
 	
+	/* (non-Javadoc)
+	 * @see model.IMap#moveUp(model.IMob)
+	 */
 	public boolean moveUp(IMob mob) {
 		return false;
 	}
 	
+	/* (non-Javadoc)
+	 * @see model.IMap#moveRight(model.IMob)
+	 */
 	public boolean moveRight(IMob mob) {
 		return false;
 	}
 	
+	/* (non-Javadoc)
+	 * @see model.IMap#moveLeft(model.IMob)
+	 */
 	public boolean moveLeft(IMob mob) {
 		return false;
 	}
