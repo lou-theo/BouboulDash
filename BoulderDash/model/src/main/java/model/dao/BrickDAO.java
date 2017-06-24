@@ -42,5 +42,4 @@ public class BrickDAO extends AbstractDAO {
 		}
 		return bricks;
 	}
-
 }

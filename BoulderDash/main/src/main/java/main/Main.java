@@ -1,13 +1,7 @@
 package main;
 
 import java.io.IOException;
-
-import controller.ControllerFacade;
-import controller.IController;
-import model.IModel;
-import model.ModelFacade;
-import view.IView;
-import view.ViewFacade;
+import java.sql.SQLException;
 
 /**
  * <h1>The Class Main.</h1>
@@ -24,14 +18,10 @@ public abstract class Main {
      *            the arguments
      * @throws IOException 
      * @throws InterruptedException 
+     * @throws SQLException 
      */
-    public static void main(final String[] args) throws IOException, InterruptedException {
-        IModel model = new ModelFacade(2);
-        IView view = new ViewFacade(model);
-        IController controller = new ControllerFacade(model, view);
-        view.setOrderPerformer(controller.getOrderPerformer());
-        
-        controller.play();
+    public static void main(final String[] args) throws IOException, InterruptedException, SQLException {
+        new Menu();
     }
 
 }

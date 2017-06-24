@@ -3,6 +3,7 @@ package model.dao;
 import java.sql.CallableStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 
 /**
  * <h1>The Class MapDAO.</h1>
@@ -16,13 +17,16 @@ public class MapDAO extends AbstractDAO {
 	private static String sqlWidth = "{call findWidth(?)}";
 	private static String sqlTimer = "{call findTimer(?)}";
 	private static String sqlDiamondLeft = "{call findDiamondToCollect(?)}";
+	private static String sqlAllLevels = "{call findAllLevels()}";
 	private static int heightColumnIndex = 1;
 	private static int widthColumnIndex = 1;
 	private static int TimerColumnIndex = 1;
 	private static int diamondLeftColumnIndex = 1;
+	private static int AllLevelsColumnIndex = 1;
 
 	/**
 	 * Give the height of the map
+	 * 
 	 * @param level
 	 * @return
 	 * @throws SQLException
@@ -45,6 +49,7 @@ public class MapDAO extends AbstractDAO {
 
 	/**
 	 * Give the width of the map
+	 * 
 	 * @param level
 	 * @return
 	 * @throws SQLException
@@ -67,6 +72,7 @@ public class MapDAO extends AbstractDAO {
 
 	/**
 	 * Gives the number of seconds to finish the level
+	 * 
 	 * @param level
 	 * @return
 	 * @throws SQLException
@@ -89,6 +95,7 @@ public class MapDAO extends AbstractDAO {
 
 	/**
 	 * Get the number of diamonds to collect to be allowed to finish the level
+	 * 
 	 * @param level
 	 * @return
 	 * @throws SQLException
@@ -109,4 +116,20 @@ public class MapDAO extends AbstractDAO {
 		return DiamondLeft;
 	}
 
+	public static ArrayList<Integer> getAllLevels() throws SQLException {
+		ArrayList<Integer> levels = new ArrayList<Integer>();
+		CallableStatement callStatement = prepareCall(sqlAllLevels);
+
+		if (callStatement.execute()) {
+			final ResultSet result = callStatement.getResultSet();
+
+			for (boolean isResultLeft = result.first(); isResultLeft; isResultLeft = result.next()) {
+
+				levels.add(result.getInt(AllLevelsColumnIndex));
+			}
+			result.close();
+
+		}
+		return levels;
+	}
 }
