@@ -95,28 +95,28 @@ public interface IMap {
 	/**
 	 * Move down the hero and makes interactions if needed
 	 * @param mobile
-	 * @return
+	 * @return true if there is a move, false if there isn't
 	 */
 	boolean moveDown(IMobile mobile);
 
 	/**
 	 * Move up the hero and makes interactions if needed
 	 * @param mobile
-	 * @return
+	 * @return true if there is a move, false if there isn't
 	 */
 	boolean moveUp(IMobile mobile);
 	
 	/**
 	 * Move right the hero and makes interactions if needed
 	 * @param mobile
-	 * @return
+	 * @return true if there is a move, false if there isn't
 	 */
 	boolean moveRight(IMobile mobile);
 	
 	/**
 	 * Move left the hero and makes interactions if needed
 	 * @param mobile
-	 * @return
+	 * @return true if there is a move, false if there isn't
 	 */
 	boolean moveLeft(IMobile mobile);
 	
@@ -124,21 +124,21 @@ public interface IMap {
 	/**
 	 * Move down the fall element and makes interactions if needed
 	 * @param fall
-	 * @return
+	 * @return true if there is a move, false if there isn't
 	 */
 	boolean moveDown(IFall fall);
 
 	/**
 	 * Move right the fall element and makes interactions if needed
 	 * @param fall
-	 * @return
+	 * @return true if there is a move, false if there isn't
 	 */
 	boolean moveRight(IFall fall);
 
 	/**
 	 * Move left the fall element and makes interactions if needed
 	 * @param fall
-	 * @return
+	 * @return true if there is a move, false if there isn't
 	 */
 	boolean moveLeft(IFall fall);
 	
@@ -151,28 +151,28 @@ public interface IMap {
 	/**
 	 * Move down the mob given and makes interactions if needed
 	 * @param mob
-	 * @return
+	 * @return true if there is a move, false if there isn't
 	 */
 	public boolean moveDown(IMob mob);
 
 	/**
 	 * Move up the mob given and makes interactions if needed
 	 * @param mob
-	 * @return
+	 * @return true if there is a move, false if there isn't
 	 */
 	public boolean moveUp(IMob mob);
 
 	/**
 	 * Move right the mob given and makes interactions if needed
 	 * @param mob
-	 * @return
+	 * @return true if there is a move, false if there isn't
 	 */
 	public boolean moveRight(IMob mob);
 
 	/**
 	 * Move left the mob given and makes interactions if needed
 	 * @param mob
-	 * @return
+	 * @return true if there is a move, false if there isn't
 	 */
 	public boolean moveLeft(IMob mob);
 }

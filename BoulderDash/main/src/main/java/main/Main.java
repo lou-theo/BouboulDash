@@ -26,7 +26,7 @@ public abstract class Main {
      * @throws InterruptedException 
      */
     public static void main(final String[] args) throws IOException, InterruptedException {
-        IModel model = new ModelFacade(1);
+        IModel model = new ModelFacade(2);
         IView view = new ViewFacade(model);
         IController controller = new ControllerFacade(model, view);
         view.setOrderPerformer(controller.getOrderPerformer());

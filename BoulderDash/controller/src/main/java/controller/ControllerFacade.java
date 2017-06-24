@@ -1,5 +1,6 @@
 package controller;
 
+import model.Direction;
 import model.IFall;
 import model.IMob;
 import model.IModel;
@@ -21,6 +22,7 @@ public class ControllerFacade implements IController, IOrderPerformer {
 
 	/**
 	 * The ModelFacade constructor
+	 * 
 	 * @param model
 	 * @param view
 	 */
@@ -32,6 +34,7 @@ public class ControllerFacade implements IController, IOrderPerformer {
 
 	/**
 	 * The getter of the model
+	 * 
 	 * @return model
 	 */
 	private IModel getModel() {
@@ -40,6 +43,7 @@ public class ControllerFacade implements IController, IOrderPerformer {
 
 	/**
 	 * The setter of the model
+	 * 
 	 * @param model
 	 */
 	private void setModel(IModel model) {
@@ -48,6 +52,7 @@ public class ControllerFacade implements IController, IOrderPerformer {
 
 	/**
 	 * the getter of the view
+	 * 
 	 * @return view
 	 */
 	private IView getView() {
@@ -56,6 +61,7 @@ public class ControllerFacade implements IController, IOrderPerformer {
 
 	/**
 	 * The setter of the view
+	 * 
 	 * @param view
 	 */
 	private void setView(IView view) {
@@ -63,7 +69,9 @@ public class ControllerFacade implements IController, IOrderPerformer {
 	}
 
 	/**
-	 * The setter of the stack order. The stack order stock the last order of the user
+	 * The setter of the stack order. The stack order stock the last order of
+	 * the user
+	 * 
 	 * @param stackOrder
 	 */
 	private void setStackOrder(UserOrder stackOrder) {
@@ -72,6 +80,7 @@ public class ControllerFacade implements IController, IOrderPerformer {
 
 	/**
 	 * The getter of the stackOrder
+	 * 
 	 * @return stackOrder
 	 */
 	private UserOrder getStackOrder() {
@@ -85,18 +94,19 @@ public class ControllerFacade implements IController, IOrderPerformer {
 		this.stackOrder = UserOrder.NOP;
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see controller.IController#play()
 	 */
 	@Override
 	public void play() throws InterruptedException {
 		while (this.getModel().getMap().getMyCharacter().isAlive() == true
-				&& this.getModel().getTimer().isTimeAway() == false
-				&& this.getModel().isWin() == false) {
+				&& this.getModel().getTimer().isTimeAway() == false && this.getModel().isWin() == false) {
 			this.gameLoop();
 		}
 		this.getModel().getTimer().setGameFinished(true);
-		
+
 		if (this.getModel().isWin()) {
 			this.getView().displayMessage("You Win !\nYou're so strong !");
 		} else {
@@ -107,8 +117,9 @@ public class ControllerFacade implements IController, IOrderPerformer {
 	}
 
 	/**
-	 * Launch by play method, run while the loop of the game didn't stop
-	 * Makes move the different elements which are able to move one per one
+	 * Launch by play method, run while the loop of the game didn't stop Makes
+	 * move the different elements which are able to move one per one
+	 * 
 	 * @throws InterruptedException
 	 */
 	private void gameLoop() throws InterruptedException {
@@ -119,23 +130,31 @@ public class ControllerFacade implements IController, IOrderPerformer {
 		for (IFall fall : this.getModel().getMap().getFalls()) {
 			this.moveFall(fall);
 		}
-		
-		for (IMob mob : this.getModel().getMap().getMobs()) {
+
+		/*for (IMob mob : this.getModel().getMap().getMobs()) {
 			if (mob.isAlive() == false) {
 				this.getModel().getMap().die(mob);
+				this.getModel().getMap().removeMob(mob);
+			}
+		}*/
+		
+		for (int i = 0; i < this.getModel().getMap().getMobs().size(); i++) {
+			if (this.getModel().getMap().getMobs().get(i).isAlive() == false) {
+				this.getModel().getMap().die(this.getModel().getMap().getMobs().get(i));
+				this.getModel().getMap().removeMob(this.getModel().getMap().getMobs().get(i));
 			}
 		}
-		
+
+		for (IMob mob : this.getModel().getMap().getMobs()) {
+			if (mob.isAlive()) {
+				this.moveMob(mob);
+			}
+		}
+
 		if (this.getModel().getMap().getMyCharacter().isAlive() == false) {
 			this.getModel().getMap().die(this.getModel().getMap().getMyCharacter());
 		}
 
-		for (IMob mob : this.getModel().getMap().getMobs()) {
-			if (mob.isAlive() == false) {
-				this.moveMob(mob);
-			}
-		}
-		
 	}
 
 	/**
@@ -164,50 +183,76 @@ public class ControllerFacade implements IController, IOrderPerformer {
 
 		this.clearStackOrder();
 	}
-	
+
 	/**
 	 * Move the given mob according to his direction
+	 * 
 	 * @param mob
 	 */
 	public void moveMob(IMob mob) {
-
+		switch (mob.getDirection()) {
+		case DOWN:
+			if (this.getModel().getMap().moveDown(mob) == false) {
+				mob.setDirection(Direction.RIGHT);
+			}
+			break;
+		case RIGHT:
+			if (this.getModel().getMap().moveRight(mob) == false) {
+				mob.setDirection(Direction.UP);
+			}
+			break;
+		case UP:
+			if (this.getModel().getMap().moveUp(mob) == false) {
+				mob.setDirection(Direction.LEFT);
+			}
+			break;
+		case LEFT:
+			if (this.getModel().getMap().moveLeft(mob) == false) {
+				mob.setDirection(Direction.DOWN);
+			}
+			break;
+		default:
+			break;
+		}
 	}
 
 	/**
 	 * Try to make fall the given fall element (a diamond or a rock)
+	 * 
 	 * @param fall
 	 */
 	public void moveFall(IFall fall) {
 		if (this.getModel().getMap().moveDown(fall)) {
-			
-			
+
 		} else if (this.getModel().getMap().getOnTheMapXY(fall.getX() - 1, fall.getY() + 1)
 				.getPermeability() == Permeability.PENETRABLE
 				&& this.getModel().getMap().getOnTheMapXY(fall.getX(), fall.getY() + 1)
-				.getPermeability() != Permeability.BREAKABLE
+						.getPermeability() != Permeability.BREAKABLE
 				&& this.getModel().getMap().getOnTheMapXY(fall.getX(), fall.getY() + 1)
-				.getPermeability() != Permeability.LIVING) {
+						.getPermeability() != Permeability.LIVING) {
 			if (this.getModel().getMap().moveLeft(fall)) {
-				
+
 			} else if (this.getModel().getMap().getOnTheMapXY(fall.getX() + 1, fall.getY() + 1)
 					.getPermeability() == Permeability.PENETRABLE
 					&& this.getModel().getMap().getOnTheMapXY(fall.getX(), fall.getY() + 1)
-					.getPermeability() != Permeability.BREAKABLE
+							.getPermeability() != Permeability.BREAKABLE
 					&& this.getModel().getMap().getOnTheMapXY(fall.getX(), fall.getY() + 1)
-					.getPermeability() != Permeability.LIVING) {
+							.getPermeability() != Permeability.LIVING) {
 				this.getModel().getMap().moveRight(fall);
 			}
 		} else if (this.getModel().getMap().getOnTheMapXY(fall.getX() + 1, fall.getY() + 1)
 				.getPermeability() == Permeability.PENETRABLE
 				&& this.getModel().getMap().getOnTheMapXY(fall.getX(), fall.getY() + 1)
-				.getPermeability() != Permeability.BREAKABLE
+						.getPermeability() != Permeability.BREAKABLE
 				&& this.getModel().getMap().getOnTheMapXY(fall.getX(), fall.getY() + 1)
-				.getPermeability() != Permeability.LIVING) {
+						.getPermeability() != Permeability.LIVING) {
 			this.getModel().getMap().moveRight(fall);
 		}
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see controller.IOrderPerformer#orderPerform(controller.UserOrder)
 	 */
 	@Override
@@ -215,7 +260,9 @@ public class ControllerFacade implements IController, IOrderPerformer {
 		this.setStackOrder(userOrder);
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see controller.IController#getOrderPerformer()
 	 */
 	@Override

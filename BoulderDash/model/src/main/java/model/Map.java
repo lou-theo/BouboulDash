@@ -34,6 +34,7 @@ public class Map implements IMap {
 
 	/**
 	 * The map constructor
+	 * 
 	 * @param level
 	 * @param model
 	 */
@@ -50,7 +51,9 @@ public class Map implements IMap {
 	}
 
 	/**
-	 * Load the value from the database and generate the map according to the data
+	 * Load the value from the database and generate the map according to the
+	 * data
+	 * 
 	 * @param level
 	 * @throws SQLException
 	 */
@@ -116,8 +119,9 @@ public class Map implements IMap {
 
 	}
 
-	
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see model.IMap#getWidth()
 	 */
 	@Override
@@ -127,14 +131,16 @@ public class Map implements IMap {
 
 	/**
 	 * The setter of the width of the map
+	 * 
 	 * @param width
 	 */
 	private void setWidth(int width) {
 		this.width = width;
 	}
 
-	
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see model.IMap#getHeight()
 	 */
 	@Override
@@ -144,14 +150,16 @@ public class Map implements IMap {
 
 	/**
 	 * The setter of the height of the map
+	 * 
 	 * @param height
 	 */
 	private void setHeight(int height) {
 		this.height = height;
 	}
 
-	
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see model.IMap#getOnTheMapXY(int, int)
 	 */
 	@Override
@@ -159,8 +167,9 @@ public class Map implements IMap {
 		return this.onTheMap[x][y];
 	}
 
-	
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see model.IMap#setOnTheMapXY(model.IElement, int, int)
 	 */
 	@Override
@@ -168,8 +177,9 @@ public class Map implements IMap {
 		this.onTheMap[x][y] = element;
 	}
 
-	
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see model.IMap#setMapHasChanged()
 	 */
 	@Override
@@ -177,8 +187,9 @@ public class Map implements IMap {
 		this.model.setModelChanged();
 	}
 
-	
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see model.IMap#getObservable()
 	 */
 	@Override
@@ -186,8 +197,9 @@ public class Map implements IMap {
 		return this.model.getObservable();
 	}
 
-	
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see model.IMap#getMyCharacter()
 	 */
 	@Override
@@ -197,14 +209,16 @@ public class Map implements IMap {
 
 	/**
 	 * The setter of the character, the Hero
+	 * 
 	 * @param myCharacter
 	 */
 	private void setMyCharacter(IMobile myCharacter) {
 		this.myCharacter = myCharacter;
 	}
 
-	
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see model.IMap#getMobs()
 	 */
 	@Override
@@ -212,8 +226,9 @@ public class Map implements IMap {
 		return this.mobs;
 	}
 
-	
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see model.IMap#addMob(model.IMob)
 	 */
 	@Override
@@ -221,17 +236,19 @@ public class Map implements IMap {
 		this.getMobs().add(mob);
 	}
 
-	
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see model.IMap#removeMob(model.IMob)
 	 */
 	@Override
 	public void removeMob(IMob mob) {
 		this.getMobs().remove(mob);
 	}
-	
-	
-	/* (non-Javadoc)
+
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see model.IMap#getFalls()
 	 */
 	@Override
@@ -239,8 +256,9 @@ public class Map implements IMap {
 		return this.falls;
 	}
 
-	
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see model.IMap#addFall(model.IFall)
 	 */
 	@Override
@@ -248,8 +266,9 @@ public class Map implements IMap {
 		this.getFalls().add(fall);
 	}
 
-	
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see model.IMap#removeFall(model.IFall)
 	 */
 	@Override
@@ -257,7 +276,9 @@ public class Map implements IMap {
 		this.getFalls().remove(fall);
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see model.IMap#moveDown(model.IMobile)
 	 */
 	public boolean moveDown(IMobile mobile) {
@@ -310,7 +331,9 @@ public class Map implements IMap {
 		return result;
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see model.IMap#moveUp(model.IMobile)
 	 */
 	public boolean moveUp(IMobile mobile) {
@@ -363,7 +386,9 @@ public class Map implements IMap {
 		return result;
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see model.IMap#moveRight(model.IMobile)
 	 */
 	public boolean moveRight(IMobile mobile) {
@@ -415,7 +440,9 @@ public class Map implements IMap {
 		return result;
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see model.IMap#moveLeft(model.IMobile)
 	 */
 	public boolean moveLeft(IMobile mobile) {
@@ -468,7 +495,8 @@ public class Map implements IMap {
 	}
 
 	/**
-	 * Tell how will be an element of the given type at the given coordinate 
+	 * Tell how will be an element of the given type at the given coordinate
+	 * 
 	 * @param x
 	 * @param y
 	 * @param elementType
@@ -494,10 +522,9 @@ public class Map implements IMap {
 				&& elementType == ElementType.HERO) {
 			result = PassingState.PUSH;
 		} else if (this.getOnTheMapXY(x, y).getPermeability() == Permeability.ENTRY
-				&& this.getOnTheMapXY(x, y).getElementType() == ElementType.HERO && elementType == ElementType.MOB) {
-			result = PassingState.ESCAPE;
-		} else if (this.getOnTheMapXY(x, y).getPermeability() == Permeability.LIVING
 				&& elementType == ElementType.HERO) {
+			result = PassingState.ESCAPE;
+		} else if (this.getOnTheMapXY(x, y).getElementType() == ElementType.HERO && elementType == ElementType.MOB) {
 			result = PassingState.DIE;
 		} else {
 			result = PassingState.BLOCK;
@@ -506,7 +533,9 @@ public class Map implements IMap {
 		return result;
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see model.IMap#moveDown(model.IFall)
 	 */
 	public boolean moveDown(IFall fall) {
@@ -523,13 +552,17 @@ public class Map implements IMap {
 			if (this.getOnTheMapXY(x, y + 2).getPermeability() == Permeability.LIVING) {
 				((IMobile) this.getOnTheMapXY(x, y + 2)).die();
 			}
+		} else if (this.getOnTheMapXY(x, y + 1).getElementType() == ElementType.MOB) {
+			((IMobile) this.getOnTheMapXY(x, y + 1)).die();
 		}
 
 		this.setMapHasChanged();
 		return result;
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see model.IMap#moveRight(model.IFall)
 	 */
 	public boolean moveRight(IFall fall) {
@@ -548,7 +581,9 @@ public class Map implements IMap {
 		return result;
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see model.IMap#moveLeft(model.IFall)
 	 */
 	public boolean moveLeft(IFall fall) {
@@ -567,15 +602,16 @@ public class Map implements IMap {
 		return result;
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see model.IMap#die(model.IMobile)
 	 */
 	public void die(IMobile mobile) {
 		mobile.die();
 		if (((IElement) mobile).getElementType() == ElementType.MOB) {
-			this.removeMob((IMob) mobile);
 			this.explosion(((IMob) mobile).isDroppable(), mobile);
-			
+
 			this.model.getCounter().addPoint(((IMob) mobile).getValue());
 		} else if (((IElement) mobile).getElementType() == ElementType.HERO) {
 			this.explosion(false, mobile);
@@ -586,7 +622,9 @@ public class Map implements IMap {
 	}
 
 	/**
-	 * Generate air if setDiamond is false and diamonds if true in the blast area of the given mobile
+	 * Generate air if setDiamond is false and diamonds if true in the blast
+	 * area of the given mobile
+	 * 
 	 * @param setDiamond
 	 * @param mobile
 	 */
@@ -598,11 +636,15 @@ public class Map implements IMap {
 			for (int j = 1; j > -2; j--) {
 				if (this.getOnTheMapXY(x + i, y + j).getPermeability() != Permeability.UNBREAKABLE
 						&& this.getOnTheMapXY(x + i, y + j).getPermeability() != Permeability.ENTRY) {
-					
+
 					if (this.getOnTheMapXY(x + i, y + j).getElementType() == ElementType.FALL) {
-						this.removeFall((IFall) this.getOnTheMapXY(x + i, y + j)); 
+						this.removeFall((IFall) this.getOnTheMapXY(x + i, y + j));
 					}
-					
+
+					if (this.getOnTheMapXY(x + i, y + j).getPermeability() == Permeability.LIVING) {
+						((IMobile) getOnTheMapXY(x + i, y + j)).die();
+					}
+
 					if (setDiamond) {
 						IFall fall = FallFactory.createDiamond(x + i, y + j, this);
 						setOnTheMapXY((IElement) fall, x + i, y + j);
@@ -610,41 +652,132 @@ public class Map implements IMap {
 					} else {
 						this.setOnTheMapXY(MotionLessElementFactory.createAir(), x + i, y + j);
 					}
-					
-					if (this.getOnTheMapXY(x + i, y + j).getPermeability() == Permeability.LIVING
-							&& i != 0 && j != 0) {
-						this.die((IMobile) getOnTheMapXY(x + i, y + j));
-					}
 				}
 			}
 		}
 	}
-	
-	/* (non-Javadoc)
+
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see model.IMap#moveDown(model.IMob)
 	 */
 	public boolean moveDown(IMob mob) {
-		return false;
+		int x = mob.getX();
+		int y = mob.getY();
+		boolean result = false;
+
+		mob.setDirection(Direction.DOWN);
+
+		switch (isPassing(x, y + 1, ((IElement) mob).getElementType())) {
+		case PASS:
+			this.setOnTheMapXY(this.getOnTheMapXY(x, y), x, y + 1);
+			this.setOnTheMapXY(MotionLessElementFactory.createAir(), x, y);
+			((IMobile) this.getOnTheMapXY(x, y + 1)).setY(y + 1);
+
+			result = true;
+			break;
+		case DIE:
+			this.die(mob);
+			break;
+		default:
+			break;
+		}
+
+		this.setMapHasChanged();
+		return result;
 	}
-	
-	/* (non-Javadoc)
+
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see model.IMap#moveUp(model.IMob)
 	 */
 	public boolean moveUp(IMob mob) {
-		return false;
+		int x = mob.getX();
+		int y = mob.getY();
+		boolean result = false;
+
+		mob.setDirection(Direction.UP);
+
+		switch (isPassing(x, y - 1, ((IElement) mob).getElementType())) {
+		case PASS:
+			this.setOnTheMapXY(this.getOnTheMapXY(x, y), x, y - 1);
+			this.setOnTheMapXY(MotionLessElementFactory.createAir(), x, y);
+			((IMobile) this.getOnTheMapXY(x, y - 1)).setY(y - 1);
+
+			result = true;
+			break;
+		case DIE:
+			this.die(mob);
+			break;
+		default:
+			break;
+		}
+
+		this.setMapHasChanged();
+		return result;
 	}
-	
-	/* (non-Javadoc)
+
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see model.IMap#moveRight(model.IMob)
 	 */
 	public boolean moveRight(IMob mob) {
-		return false;
+		int x = mob.getX();
+		int y = mob.getY();
+		boolean result = false;
+
+		mob.setDirection(Direction.RIGHT);
+
+		switch (isPassing(x + 1, y, ((IElement) mob).getElementType())) {
+		case PASS:
+			this.setOnTheMapXY(this.getOnTheMapXY(x, y), x + 1, y);
+			this.setOnTheMapXY(MotionLessElementFactory.createAir(), x, y);
+			((IMobile) this.getOnTheMapXY(x + 1, y)).setX(x + 1);
+
+			result = true;
+			break;
+		case DIE:
+			this.die(mob);
+			break;
+		default:
+			break;
+		}
+
+		this.setMapHasChanged();
+		return result;
 	}
-	
-	/* (non-Javadoc)
+
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see model.IMap#moveLeft(model.IMob)
 	 */
 	public boolean moveLeft(IMob mob) {
-		return false;
+		int x = mob.getX();
+		int y = mob.getY();
+		boolean result = false;
+
+		mob.setDirection(Direction.LEFT);
+
+		switch (isPassing(x - 1, y, ((IElement) mob).getElementType())) {
+		case PASS:
+			this.setOnTheMapXY(this.getOnTheMapXY(x, y), x - 1, y);
+			this.setOnTheMapXY(MotionLessElementFactory.createAir(), x, y);
+			((IMobile) this.getOnTheMapXY(x - 1, y)).setX(x - 1);
+
+			result = true;
+			break;
+		case DIE:
+			this.die(mob);
+			break;
+		default:
+			break;
+		}
+
+		this.setMapHasChanged();
+		return result;
 	}
 }
