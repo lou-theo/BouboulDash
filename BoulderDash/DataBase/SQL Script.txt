@@ -331,3 +331,13 @@ FROM
 WHERE
 	name = callout$$
 DELIMITER ;
+
+
+DELIMITER $$
+CREATE DEFINER=`root`@`localhost` PROCEDURE `findAllLevels`()
+    NO SQL
+SELECT
+	ID
+FROM
+	map$$
+DELIMITER ;
