@@ -110,7 +110,7 @@ public class ControllerFacade implements IController, IOrderPerformer {
 		if (this.getModel().isWin()) {
 			this.getView().displayMessage("You Win !\nYou're so strong !");
 		} else {
-			this.getView().displayMessage("T'ES MORT BOLOSS");
+			this.getView().displayMessage("You are dead...\nTry again !");
 		}
 
 		this.getView().closeAll();
