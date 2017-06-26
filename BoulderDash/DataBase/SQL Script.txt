@@ -93,7 +93,9 @@ INSERT INTO `map` (`ID`, `Width`, `Height`, `DiamondToCollect`, `Timer`) VALUES
 (2, 10, 10, 2, 60),
 (3, 40, 22, 18, 120),
 (4, 40, 22, 18, 120),
-(5, 40, 22, 14, 120);
+(5, 40, 22, 14, 120),
+(6, 20, 15, 10, 120),
+(7, 40, 20, 30, 200);
 
 
 INSERT INTO `composed` (`X`, `Y`, `ID_Map`, `ID_Element`) VALUES
